@@ -1,12 +1,29 @@
-DB_CONN="mongodb://admin-jl1:jladmin1@ds137271.mlab.com:37271/travels-db1"
-DB_CONN2="mongodb://adminfo2:foadmin2@ds137271.mlab.com:37271/travels-db1"
-DB_CONN3="mongodb://adminwm3:wmadmin3@ds137271.mlab.com:37271/travels-db1"
 
-admin-jl1
-jladmin1
+//DEPENDENCIES
+const mongoose = require('mongoose');
+const express = require('express');
+const bodyParser = require('body-parser');
+require('dotenv').config();
 
-adminfo2
-foadmin2
+//MONGOOSE CONNECTION
+mongoose.connection.openUri(process.env.DB_CONN, function(err,conn){
+	if(err){
+		console.log('Error connecting to Mongo DB');
+	}else{
+		console.log('Successfully connected to Mongo DB');
+	}
+})
+//app setup
+const app = express();
+const port = process.env.PORT || 3000;
 
-adminwm3
-wmadmin3
+app.use(bodyParser.json());
+
+app.get('/', function(req,res){
+	res.send('test');
+});
+
+app.listen(port,function(){
+	console.log(`Server listening on port ${port}`);
+});
+>>>>>>> upstream/master
