@@ -1,7 +1,7 @@
 # update process 
 
 ## project details
-master branch is controlled by Francisco at git@github.com:CescoIV/my_travels_log.git
+master branch is controlled by Francisco (Slack: @Fordaz) at git@github.com:CescoIV/my_travels_log.git
 
 
 ## update steps
@@ -19,6 +19,6 @@ Update your local repo from your personal fork with all updates current in the m
 
     *side note: the term master refers to the master fork, you could also update a different branch by putting the name in.*
 
-3. Update your fork repo to 
+3. Update your fork repo to your github then submit a pull request to turn your changes in to the master (managed by Francisco)
     ```git push origin master```
 
