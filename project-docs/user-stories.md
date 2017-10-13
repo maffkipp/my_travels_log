@@ -25,3 +25,6 @@
 * users can view a stats table that counts how many places, how many cities, how many countries.
 * nearby attractions fed about that location. 
 * App figures out if local auth and facebook are same user and routes either to the ssame acct
+* photos of city displayed from api? 
+* user clicks map to have geo coordinates add a location info to the create form as values so when they click add a location, it's all ready for them or they can then click somewhere new to populate the default form values. 
+
