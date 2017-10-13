@@ -22,3 +22,4 @@ Update your local repo from your personal fork with all updates current in the m
 3. Update your fork repo to your github then submit a pull request to turn your changes in to the master (managed by Francisco)
     ```git push origin master```
 
+4. NOTIFY EVERYONE ON SLACK CHANNEL OF YOUR UPDATES
