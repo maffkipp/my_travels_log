@@ -21,17 +21,15 @@ const FacebookUserInfoSchema = new mongoose.Schema({
   lastName: String,
   email: String,
   profilePhoto: String,
-  locations: [{
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'location',
-    default: 'none'
-  }]
+  locations: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Location', default: '' }]
 });
 
-const UserSchema = new mongoose.Schema({
-  fb: FacebookUserInfoSchema
-});
+// const UserSchema = new mongoose.Schema({
+//   fb: FacebookUserInfoSchema
+// });
 
-const User = mongoose.model('User', UserSchema);
+const User = mongoose.model('User', FacebookUserInfoSchema);
 
-module.exports = User;
+module.exports = {  // lets export that model
+  User: User
+}

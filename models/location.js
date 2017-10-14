@@ -5,7 +5,7 @@ const LocationSchema = new mongoose.Schema({
     lat: String,
     city: String,
     country: String,
-    createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: 'none' },
+    // todo: createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: '' },
     visitDate: Date
 });
 
