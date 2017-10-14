@@ -16,8 +16,7 @@ https://trello.com/b/pAkx1HId/mytravels-board
 * Users locations display a pin on the google api map
 * Users can view all locations they've added
 * Users can update/delete locations they've added. 
-
-
+* User can logout
 
 
 Sprint 0 [Fri Oct 13 Morning] 

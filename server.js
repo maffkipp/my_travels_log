@@ -6,25 +6,28 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 //MONGOOSE CONNECTION
-mongoose.connection.openUri(process.env.DB_CONN, function(err,conn){
-	if(err){
-		console.log('Error connecting to Mongo DB');
-	}else{
-		console.log('Successfully connected to Mongo DB');
-	}
-})
+   // now handled by models/index.js via the routes/route.js (jesse)
+
 //app setup
 const app = express();
 const port = process.env.PORT || 3000;
+
 
 //enable views with ejs engine
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-
 //enable bodyparser for html or forms responses
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
+
+
+//Routes and link to route CRUD functions in routes/routes.js
+const appRoutes  = require('./routes/routes'); //link up routes file
+app.get('/', appRoutes.returnHomePage);
+app.get('/', appRoutes.returnDashboardPage);
+
+
 
 app.get('/', function(req,res){
 	res.render('index');
