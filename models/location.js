@@ -6,7 +6,7 @@ const LocationSchema = new mongoose.Schema({
     city: String,
     country: String,
     createdBy: { type: mongoose.Schema.Types.ObjectId, ref: 'User', default: 'none' },
-    dateVisited: Date
+    visitDate: Date
 });
 
 const Location = mongoose.model('Location', LocationSchema); // lets make a model a thing

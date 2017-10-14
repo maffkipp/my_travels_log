@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 
 //MONGOOSE CONNECTION
-   // now handled by models/index.js via the routes/route.js (jesse)
+   //Now handled by models/index.js via the routes/route.js (jesse)
 
 //app setup
 const app = express();
@@ -26,8 +26,7 @@ app.use(bodyParser.json());
 const appRoutes  = require('./routes/routes'); //link up routes file
 app.get('/', appRoutes.returnHomePage);
 app.get('/', appRoutes.returnDashboardPage);
-
-
+app.post('/api/newloc', appRoutes.createNewLocation);
 
 app.get('/', function(req,res){
 	res.render('index');
