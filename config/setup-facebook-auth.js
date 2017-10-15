@@ -1,3 +1,4 @@
+const db = require('../models/index');
 const User = require('../models/user');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
@@ -24,7 +25,7 @@ function setupFacebookAuthStrategy(passport){
 
 	passport.use('facebook', new FacebookStrategy(strategyObj,
 		function(access_token, refresh_token,profile,done){
-			Users.findOne({'fb.id': profile.id}, function(err,user){
+			User.findOne({'fb.id': profile.id}, function(err,user){
 				if(err){
 					done(err);
 				}else if(user){

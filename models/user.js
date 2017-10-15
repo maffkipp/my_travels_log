@@ -30,6 +30,4 @@ const FacebookUserInfoSchema = new mongoose.Schema({
 
 const User = mongoose.model('User', FacebookUserInfoSchema);
 
-module.exports = {  // lets export that model
-  User: User
-}
+module.exports = User;
