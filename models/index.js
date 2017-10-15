@@ -4,7 +4,8 @@ require('dotenv').config();  //need dot env because we connect db down here
 //include all model files here (and export models together below)
 const userModels = require('./user');
 const locationModels = require('./location');
-
+//fix promise bug
+mongoose.Promise = global.Promise;
 // connect to Mongo DB   // processes from my .env failsafe db (why? just cuz..)
 mongoose.connection.openUri(process.env.DB_CONN, {}, function(err, conn) {
   if (err) {

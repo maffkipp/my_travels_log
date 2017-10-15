@@ -31,8 +31,8 @@ app.get('/auth/facebook', passport.authenticate('facebook',{scope: 'email'}));
 //redirects to homepage on both failure and success, may need ammends - F
 app.get('/auth/facebook/callback', 
 	passport.authenticate('facebook',{
-		successRedirect: '/',
-		failureRedirect: '.'
+		successRedirect: '/dashboard',
+		failureRedirect: '/'
 	})
 );
 

@@ -22,10 +22,10 @@ function setupFacebookAuthStrategy(passport){
 		enableProof: true,
 		profileFields: ['name','emails','photos'],
 	};
-
+	
 	passport.use('facebook', new FacebookStrategy(strategyObj,
 		function(access_token, refresh_token,profile,done){
-			User.findOne({'fb.id': profile.id}, function(err,user){
+			User.findOne({'facebookId': profile.id}, function(err,user){
 				if(err){
 					done(err);
 				}else if(user){
