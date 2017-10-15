@@ -21,15 +21,19 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({extended:false}));
 app.use(bodyParser.json());
 
+// Use public directory to serve static files
+app.use(express.static('public'));
 
 // APP ROUTES
 //Routes and link to route CRUD functions in routes/routes.js
 const appRoutes  = require('./routes/routes'); //link up routes file
-app.get('/', appRoutes.returnHomePage); //serve up home page (should be done if no oAuth success)
-app.get('/', appRoutes.returnDashboardPage); //serve up dashboard (should be done on oAuth success)
+// app.get('/', appRoutes.returnHomePage); //serve up home page (should be done if no oAuth success)
+// app.get('/', appRoutes.returnDashboardPage); //serve up dashboard (should be done on oAuth success)
 app.post('/locations/:userid', appRoutes.createNewLocation); //creating a location to a specific user
 app.get('/locations/:userid', appRoutes.getUserLocations); //getting all locations for a specific user
 
+app.get('/', appRoutes.returnHomePage);
+app.get('/dashboard', appRoutes.returnDashboardPage);
 
  // temporary user routes for postman relationship testing.
 app.post('/users', appRoutes.createNewUser); //populate new user in account
