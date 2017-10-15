@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>OAuth Enabled</title>
+</head>
+<body>
+	<h1>Log In with Facebook</h1>
+	<div>
+		<% if(user!= undefined){ %>
+			<h2>Below is the data from Facebook</h2>
+			<pre>
+				<%= user.fb %>
+			</pre>
+			<a href="/logout">Log out</a>
+		<% }else{ %>
+			<a href="/auth/facebook">Login with Facebook</a>
+		<% } %>
+	</div>
+</body>
+</html>

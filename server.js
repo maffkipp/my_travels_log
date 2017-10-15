@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
+const passport = require('passport');
+const facebook = require('passport-facebook');
 require('dotenv').config();
 
 
@@ -12,6 +14,33 @@ require('dotenv').config();
 //APP SETUP
 const app = express();
 const port = process.env.PORT || 3000;
+app.set('view engine','ejs');
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+//oAuth Setup
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/setup-facebook-auth')(passport);
+
+//Initial Facebook render routes with oAuth
+app.get('/', function(req,res){
+	res.render('layout', {user:req.user});
+});
+app.get('/auth/facebook', passport.authenticate('facebook',{scope: 'email'}));
+//redirects to homepage on both failure and success, may need ammends - F
+app.get('/auth/facebook/callback', 
+	passport.authenticate('facebook',{
+		successRedirect: '/',
+		failureRedirect: '.'
+	})
+);
+
+app.get('/logout', function(req,res){
+	req.logout();
+	res.redirect('/');
+})
+//
 
 //enable views with ejs engine
 app.set('views', './views');
