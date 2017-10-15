@@ -1,5 +1,3 @@
-
-
 var map;
 
 function initMap() {
@@ -10,5 +8,6 @@ function initMap() {
 }
 
 $(document).ready(function() {
+  console.log('application is running');
   initMap();
 });
