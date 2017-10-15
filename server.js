@@ -32,6 +32,8 @@ const appRoutes  = require('./routes/routes'); //link up routes file
 app.post('/locations/:userid', appRoutes.createNewLocation); //creating a location to a specific user
 app.get('/locations/:userid', appRoutes.getUserLocations); //getting all locations for a specific user
 
+// These are temporary routes for front-end testing. They can be deleted once OAuth
+//  is working and the other routes are working as intended.
 app.get('/', appRoutes.returnHomePage);
 app.get('/dashboard', appRoutes.returnDashboardPage);
 
