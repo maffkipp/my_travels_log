@@ -1,14 +1,30 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Login</title>
-  <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+	<title>OAuth Enabled</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
-  <link rel="stylesheet" type="text/css" href="/styles/styles.css">
+  <link rel="stylesheet" type="text/css" href="/styles/login.css">
 </head>
 <body>
-<h1>MyTravels</h1>
+
+	<div class='container'>
+		<h1>Log In with Facebook</h1>
+		<% if(user!= undefined){ %>
+			<h2>Below is the data from Facebook</h2>
+			<pre>
+				<%= user.fb %>
+			</pre>
+			<a href="/logout">Log out</a>
+		<% }else{ %>
+
+			<form id='center' action='/auth/facebook' method='get'>
+				<button class="loginBtn loginBtn--facebook">Login with Facebook</button>
+			</form>
+
+		<% } %>
+	</div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="/js/main.js" type="text/javascript"></script>
+<script src="/js/login.js" type="text/javascript"></script>
 </body>
 </html>
