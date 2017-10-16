@@ -77,7 +77,7 @@ function createNewLocation (req, res) {
   db.User.findById(userid, function(err, userrecord){
 
     if(err){
-      console.log('totes errored on user find by id NACHOS');
+      console.log('errored on user find by id');
     } else {
 
       //create a newlocation for that user
@@ -104,7 +104,8 @@ function createNewLocation (req, res) {
             console.log('Error saving location item to DB.', err);
             res.status(500).send('Internal server error');
           } else {
-            res.status(201).json(data);
+             res.render('dashboard', { user: req.user });
+           // res.status(201).json(data);
           }
         });
       });
