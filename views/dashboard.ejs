@@ -32,7 +32,7 @@
         <p class='list-item'>This is hardcoded for testing purposes</p>
       </li>
     </ul>
-    <form id='location-form' action='/locations/<%= user.id %>' method='post'>
+    <form id='location-form' action='/users/<%= user._id %>/location' method='post'>
       <h3>Add a Location</h3>
       <div class='form-container'>
         <div>
@@ -52,7 +52,7 @@
           <input name='lat' id='lat'>
         </div>
         <div>
-          <input type='hidden' name='id' value= '<%= user.id %>'>
+          <input type='hidden' name='userid' value= '<%= user.id %>'>
         <button type='submit'>Submit</button>
       </div>
     </form>
