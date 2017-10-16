@@ -1,0 +1,27 @@
+body {
+  background-color: $light-grey;
+}
+
+.login-container {
+  width: 50%;
+  margin: 0 auto;
+  box-shadow: $box-shadow;
+  padding: 50px;
+  margin-top: 50px;
+  background-color: white;
+  border-radius: 2px;
+}
+
+h1 {
+  text-align: center;
+  font-family: $raleway;
+  padding-bottom: 30px;
+}
+
+#center {
+  margin: 0 auto;
+  text-align: center;
+  height: 75px;
+  font-family: $lato;
+}
+
