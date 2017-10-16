@@ -1,5 +1,6 @@
 // VARIABLES
 var map;
+var userid;
 var toggle = 0;
 
 
@@ -7,6 +8,9 @@ var toggle = 0;
 $(document).ready(function() {
 
   console.log('application is running');
+
+  formUserId = $('#form-userid').val();
+  console.log(formUserId);
   // initialize the map
   initMap();
   // assign event handler to display switch button
@@ -16,7 +20,7 @@ $(document).ready(function() {
 
   $.ajax({
     method: 'GET',
-    url: '/locations',
+    url: '/locations/' + formUserId,
     dataType: 'json',
     success: onSuccess
   })
@@ -30,7 +34,6 @@ function onSuccess(responseData) {
     let locationVisited = `<li class='place-visited'><h3 class='list-item'>${location.city}, ${location.country}</h3></li>`;
     $('#city-list').append(locationVisited);
   });
-
 }
 
 // Initialize the map API
