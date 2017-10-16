@@ -60,7 +60,7 @@ app.use(express.static('public'));
 //Routes and link to route CRUD functions in routes/routes.js
 const appRoutes  = require('./routes/routes'); //link up routes file
 app.post('/users/:userid/location', appRoutes.createNewLocation); //creating a location to a specific user
-app.get('/locations', appRoutes.getUserLocations);
+app.get('/locations/:userid', appRoutes.getUserLocations);
 
 
 // These are temporary routes for front-end testing. They can be deleted once OAuth
