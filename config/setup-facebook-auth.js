@@ -25,7 +25,7 @@ function setupFacebookAuthStrategy(passport){
 
 	passport.use('facebook', new FacebookStrategy(strategyObj,
 		function(access_token, refresh_token,profile,done){
-			User.findOne({'fb.Id': profile.id}, function(err,user){
+			User.findOne({'fb.Id': profile._id}, function(err,user){
 				if(err){
 					done(err);
 				}else if(user){
