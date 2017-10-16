@@ -2,6 +2,8 @@
 const mongoose = require('mongoose');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
+const expressSession  = require('express-session');
 const passport = require('passport');
 const facebook = require('passport-facebook');
 require('dotenv').config();
@@ -18,6 +20,7 @@ app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use(expressSession({secret: 'mySecretKey'}))
 //oAuth Setup
 app.use(passport.initialize());
 app.use(passport.session());
