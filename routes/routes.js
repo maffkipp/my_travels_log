@@ -8,7 +8,7 @@ function returnHomePage (req, res) {
 }
 
 function returnDashboardPage (req, res) {
-  res.send(req.user);
+  res.render('dashboard', { user: req.user });
 }
 
 //Francisco todo: On server.js add logic if user is not logged in by oAuth, call returnHomePage, else call returnDashboard
