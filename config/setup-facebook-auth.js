@@ -14,18 +14,18 @@ function setupFacebookAuthStrategy(passport){
 	});
 
 	console.log('Setting up Facebook auth strategy');
-	
+
 	const strategyObj = {
 		clientID: process.env.FACEBOOK_APP_ID,
 		clientSecret: process.env.FACEBOOK_APP_SECRET,
 		callbackURL: 'http://localhost:3000/auth/facebook/callback',
 		enableProof: true,
-		profileFields: ['name','emails','photos'],
+		profileFields: ['id','name','emails','photos'],
 	};
 
 	passport.use('facebook', new FacebookStrategy(strategyObj,
 		function(access_token, refresh_token,profile,done){
-			User.findOne({'fb.Id': profile._id}, function(err,user){
+			User.findOne({'fb.Id': profile.id}, function(err,user){
 				if(err){
 					done(err);
 				}else if(user){
@@ -37,7 +37,7 @@ function setupFacebookAuthStrategy(passport){
 						firstName: profile.name.givenName,
 						lastName: profile.name.familyName,
 						email: profile.emails[0].value,
-						profilePhoto: profile.photos[0].value,	
+						profilePhoto: profile.photos[0].value,
 					});
 
 					newUser.save(function(err){

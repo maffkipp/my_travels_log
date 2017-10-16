@@ -10,8 +10,10 @@
 
   <div class='container'>
     <header>
-      <img class='logo' src='/img/icon-placeholder.png'>
-      <p class='username'>Username Here</p>
+      <img class='logo' src='<%= user.profilePhoto %>'>
+      <p class='username'><%= user.firstName + ' ' + user.lastName %>
+
+      </p>
     </header>
     <div id='map'></div>
     <ul>

@@ -20,7 +20,7 @@ app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(expressSession({secret: 'mySecretKey'}))
+app.use(expressSession({secret: 'mySecretKey2'}))
 //oAuth Setup
 app.use(passport.initialize());
 app.use(passport.session());
