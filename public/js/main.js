@@ -11,5 +11,3 @@ $(document).ready(function() {
   console.log('application is running');
   initMap();
 });
-
-
