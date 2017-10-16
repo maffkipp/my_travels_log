@@ -26,7 +26,11 @@ $(document).ready(function() {
 // FUNCTIONS
 
 function onSuccess(responseData) {
-  console.log(responseData);
+  responseData.forEach(location => {
+    let locationVisited = `<li class='place-visited'><h3 class='list-item'>${location.city}, ${location.country}</h3></li>`;
+    $('#city-list').append(locationVisited);
+  });
+
 }
 
 // Initialize the map API
