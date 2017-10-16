@@ -31,7 +31,7 @@
         <p class='list-item'>This is hardcoded for testing purposes</p>
       </li>
     </ul>
-    <form action='/locations' method='post'>
+    <form action='/locations/<%= user.id %>' method='post'>
       <div>
         <label>City:</label>
         <input name='city' id='city'>
@@ -48,6 +48,8 @@
         <label>Latitude:</label>
         <input name='lat' id='lat'>
       </div>
+      <div>
+        <input type='hidden' name='id' value= '<%= user.id %>'
       <button type='submit'>Submit</button>
     </form>
 
