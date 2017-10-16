@@ -18,20 +18,9 @@
     </header>
     <div id='map'></div>
     <button id='display-switch'>Switch Display</button>
-    <ul id='city-list'>
-      <li class='place-visited'>
-        <h3 class='list-item'>City, Country</h3>
-        <p class='list-item'>This is hardcoded for testing purposes</p>
-      </li>
-      <li class='place-visited'>
-        <h3 class='list-item'>City, Country</h3>
-        <p class='list-item'>This is hardcoded for testing purposes</p>
-      </li>
-      <li class='place-visited'>
-        <h3 class='list-item'>City, Country</h3>
-        <p class='list-item'>This is hardcoded for testing purposes</p>
-      </li>
-    </ul>
+
+    <ul id='city-list'></ul>
+
     <form id='location-form' action='/users/<%= user._id %>/location' method='post'>
       <h3>Add a Location</h3>
       <div class='form-container'>
