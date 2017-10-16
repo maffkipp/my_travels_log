@@ -20,7 +20,7 @@ function setupFacebookAuthStrategy(passport){
 		clientSecret: process.env.FACEBOOK_APP_SECRET,
 		callbackURL: 'http://localhost:3000/auth/facebook/callback',
 		enableProof: true,
-		profileFields: ['id','name','emails','photos'],
+		profileFields: ['name','emails','photos'],
 	};
 
 	passport.use('facebook', new FacebookStrategy(strategyObj,
@@ -31,22 +31,26 @@ function setupFacebookAuthStrategy(passport){
 				}else if(user){
 					done(null,user);
 				}else{
-					const newUser = new User({
-						id: profile.id,
-						access_token: access_token,
-						firstName: profile.name.givenName,
-						lastName: profile.name.familyName,
-						email: profile.emails[0].value,
-						profilePhoto: profile.photos[0].value,
-					});
+					User.findOne({'id': profile.id}, function(err,user){
+						if(user){
+							const newUser = new User({
+								id: profile.id,
+								access_token: access_token,
+								firstName: profile.name.givenName,
+								lastName: profile.name.familyName,
+								email: profile.emails[0].value,
+								profilePhoto: profile.photos[0].value,
+							});
 
-					newUser.save(function(err){
-						if(err){
-							done(err);
-						}else{
-							done(null, newUser);
+							newUser.save(function(err){
+								if(err){
+									done(err);
+								}else{
+									done(null, newUser);
+								}
+							});
 						}
-					});
+					})
 				}
 			});
 	}));

@@ -11,7 +11,9 @@
   <div class='container'>
     <header>
       <img class='logo' src='<%= user.profilePhoto %>'>
-      <p class='username'><%= user.firstName + ' ' + user.lastName %>
+
+      <p class='username'><%= user.firstName + ' ' + user.lastName %>, <%= user._id %>
+
       </p>
     </header>
     <div id='map'></div>

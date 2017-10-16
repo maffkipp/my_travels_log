@@ -61,8 +61,8 @@ app.use(express.static('public'));
 const appRoutes  = require('./routes/routes'); //link up routes file
 // app.get('/', appRoutes.returnHomePage); //serve up home page (should be done if no oAuth success)
 // app.get('/', appRoutes.returnDashboardPage); //serve up dashboard (should be done on oAuth success)
-app.post('/locations/:userid', appRoutes.createNewLocation); //creating a location to a specific user
-app.get('/locations/:userid', appRoutes.getUserLocations); //getting all locations for a specific user
+app.post('/users/:userid/location', appRoutes.createNewLocation); //creating a location to a specific user
+//app.get('/locations/:userid', appRoutes.getUserLocations); //getting all locations for a specific user
 
 // These are temporary routes for front-end testing. They can be deleted once OAuth
 //  is working and the other routes are working as intended.

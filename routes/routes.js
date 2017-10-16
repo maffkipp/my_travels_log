@@ -1,4 +1,6 @@
 const db = require('../models');
+const user = require('../models/user');
+const location = require('../models/location');
 
 
 /* WEB PAGE ROUTING
@@ -68,24 +70,52 @@ function updateUser(req, res) {
 
 //Create location
 function createNewLocation (req, res) {
-  const newLocation = db.Location({
-    long: req.body.long,
-    lat: req.body.lat,
-    city: req.body.city,
-    country: req.body.country,
-    createdBy: req.body.createdBy,
-    visitDate: req.body.visitDate
-  });
+  var userid = req.params.userid;
+  console.log(req.params.userid);
 
-  newLocation.save(function(err, data) {
-    if (err) {
-      console.log('Error saving location item to DB.', err);
-      res.status(500).send('Internal server error');
+  //find the user
+  db.User.findById(userid, function(err, userrecord){
+
+    if(err){
+      console.log('totes errored on user find by id NACHOS');
     } else {
-      res.status(201).json(data);
-    }
+
+      //create a newlocation for that user
+      const newLocation = new db.Location({
+        long: req.body.long,
+        lat: req.body.lat,
+        city: req.body.city,
+        country: req.body.country,
+        visitDate: req.body.visitDate
+      });
+
+      //establishing reference for user having a new location
+      //this User has this location
+      userrecord.locations.push(newLocation);
+
+      //the location has this User as its parent.
+      newLocation.createdBy = userrecord;
+
+      //save update to userrecord
+      userrecord.save(function(err, savedUser){
+        //and save a new location
+        newLocation.save(function(err, data) {
+          if (err) {
+            console.log('Error saving location item to DB.', err);
+            res.status(500).send('Internal server error');
+          } else {
+            res.status(201).json(data);
+          }
+        });
+      });
+    }//end else userrecord
+
   });
 }
+
+
+
+
 
 // Get all user's locations
 // TODO Jesse: add a query string in server.js and handle getting _id of user record
