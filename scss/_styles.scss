@@ -1,5 +1,5 @@
 body {
-  background-color: $light-grey;
+  background-color: $turquoise;
 }
 
 #map {
@@ -49,5 +49,65 @@ p {
 .list-item {
   margin: 0;
   padding: 10px;
+}
+
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 30px;
+  background-color: $light-grey;
+  font-family: $raleway;
+  border: none;
+  border-radius: $rounded;
+
+  &:hover {
+    background-color: $dark-grey;
+    transition: 200ms;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
+#location-form {
+  margin-top: 15px;
+  display: none;
+  box-shadow: $box-shadow;
+  border-radius: $rounded;
+  background-color: white;
+  font-family: $raleway;
+  padding: 20px;
+
+  .form-container {
+    width: 80%;
+    margin: 0 auto;
+  }
+
+  h3 {
+    text-align: center;
+  }
+
+  div {
+    margin: 10px;
+  }
+
+  label {
+    display: block;
+    padding: 20px 0 5px;
+  }
+
+  input {
+    width: 100%;
+    border: none;
+    border-bottom: 2px solid $light-grey;
+    height: 30px;
+    font-size: 24px;
+    color: $dark-grey;
+    font-family: $lato;
+    &:focus {
+      outline: none;
+    }
+  }
 }
 

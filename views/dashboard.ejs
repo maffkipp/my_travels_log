@@ -11,6 +11,7 @@
   <div class='container'>
     <header>
       <img class='logo' src='<%= user.profilePhoto %>'>
+
       <p class='username'><%= user.firstName + ' ' + user.lastName %>, <%= user._id %>
 
       </p>
@@ -31,26 +32,29 @@
         <p class='list-item'>This is hardcoded for testing purposes</p>
       </li>
     </ul>
-    <form action='/locations/<%= user.id %>' method='post'>
-      <div>
-        <label>City:</label>
-        <input name='city' id='city'>
+    <form id='location-form' action='/locations/<%= user.id %>' method='post'>
+      <h3>Add a Location</h3>
+      <div class='form-container'>
+        <div>
+          <label>City</label>
+          <input name='city' id='city'>
+        </div>
+        <div>
+          <label>Country</label>
+          <input name='country' id='country'>
+        </div>
+        <div>
+          <label>Longitude</label>
+          <input name='long' id='long'>
+        </div>
+        <div>
+          <label>Latitude</label>
+          <input name='lat' id='lat'>
+        </div>
+        <div>
+          <input type='hidden' name='id' value= '<%= user.id %>'>
+        <button type='submit'>Submit</button>
       </div>
-      <div>
-        <label>Country:</label>
-        <input name='country' id='country'>
-      </div>
-      <div>
-        <label>Longitude:</label>
-        <input name='long' id='long'>
-      </div>
-      <div>
-        <label>Latitude:</label>
-        <input name='lat' id='lat'>
-      </div>
-      <div>
-        <input type='hidden' name='id' value= '<%= user.id %>'
-      <button type='submit'>Submit</button>
     </form>
 
   </div>
