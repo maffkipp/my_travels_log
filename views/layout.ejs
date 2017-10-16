@@ -2,10 +2,14 @@
 <html>
 <head>
 	<title>OAuth Enabled</title>
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="/styles/login.css">
 </head>
 <body>
-	<h1>Log In with Facebook</h1>
-	<div>
+
+	<div class='container'>
+		<h1>Log In with Facebook</h1>
 		<% if(user!= undefined){ %>
 			<h2>Below is the data from Facebook</h2>
 			<pre>
@@ -13,8 +17,12 @@
 			</pre>
 			<a href="/logout">Log out</a>
 		<% }else{ %>
-			<a href="/auth/facebook">Login with Facebook</a>
+			<div id='center'>
+				<a href="/auth/facebook">Login with Facebook</a>
+			</div>
 		<% } %>
 	</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/login.js" type="text/javascript"></script>
 </body>
 </html>
