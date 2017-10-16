@@ -4,13 +4,14 @@
   "description": "Project 1",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "scss": "node-sass --watch scss -o public/styles"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/CescoIV/my_travels_log.git"
   },
-  "author": "Francisco Ordaz, Wesley Maffley-Kip, Jesse Lewis",
+  "author": "Francisco Ordaz, Wesley Maffly-Kipp, Jesse Lewis",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/CescoIV/my_travels_log/issues"
@@ -22,6 +23,7 @@
     "ejs": "^2.5.7",
     "express": "^4.16.2",
     "mongoose": "^4.12.1",
+    "node-sass": "^4.5.3",
     "passport": "^0.4.0",
     "passport-facebook": "^2.1.1"
   }
