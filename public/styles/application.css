@@ -98,7 +98,7 @@ button {
   border: none;
   border-radius: 2px; }
   button:hover {
-    background-color: #333533;
+    background-color: #595f72;
     transition: 200ms; }
   button:focus {
     outline: none; }
@@ -127,7 +127,7 @@ button {
     border-bottom: 2px solid #e8eddf;
     height: 30px;
     font-size: 24px;
-    color: #333533;
+    color: #595f72;
     font-family: "Lato", sans-serif; }
     #location-form input:focus {
       outline: none; }

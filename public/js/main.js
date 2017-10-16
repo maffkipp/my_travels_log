@@ -14,10 +14,20 @@ $(document).ready(function() {
     displaySwitch();
   });
 
+  $.ajax({
+    method: 'GET',
+    url: '/locations',
+    dataType: 'json',
+    success: onSuccess
+  })
 });
 
 
 // FUNCTIONS
+
+function onSuccess(responseData) {
+  console.log(responseData);
+}
 
 // Initialize the map API
 function initMap() {
