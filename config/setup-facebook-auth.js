@@ -1,5 +1,5 @@
 const db = require('../models/index');
-const User = require('../models/user');
+const user = require('../models/user');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
 function setupFacebookAuthStrategy(passport){
@@ -8,7 +8,7 @@ function setupFacebookAuthStrategy(passport){
 	});
 
 	passport.deserializeUser(function(id,done){
-		User.findById(id, function(err,user){
+		db.User.findById(id, function(err,user){
 			done(err,user);
 		});
 	});
@@ -25,15 +25,15 @@ function setupFacebookAuthStrategy(passport){
 
 	passport.use('facebook', new FacebookStrategy(strategyObj,
 		function(access_token, refresh_token,profile,done){
-			User.findOne({'fb.Id': profile.id}, function(err,user){
+			db.User.findOne({'fb.Id': profile.id}, function(err,user){
 				if(err){
 					done(err);
 				}else if(user){
 					done(null,user);
 				}else{
-					User.findOne({'id': profile.id}, function(err,user){
+					db.User.findOne({'id': profile.id}, function(err,user){
 						if(user){
-							const newUser = new User({
+							const newUser = new db.User({
 								id: profile.id,
 								access_token: access_token,
 								firstName: profile.name.givenName,
