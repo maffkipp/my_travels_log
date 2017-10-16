@@ -122,7 +122,7 @@ function createNewLocation (req, res) {
 // TODO Jesse: add a query string in server.js and handle getting _id of user record
 // This should get all created locations related to the user.
 function getUserLocations(req, res) {
-  db.Location.find({}, function(err, data) {
+  db.Location.find({createdBy: req.params.userid}, function(err, data) {
     if(err) {
       console.log('Error retrieving locations');
       res.status(500).send('Internal Server Error');

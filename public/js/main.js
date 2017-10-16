@@ -31,8 +31,14 @@ $(document).ready(function() {
 
 function onSuccess(responseData) {
   responseData.forEach(location => {
+    console.log(location);
     let locationVisited = `<li class='place-visited'><h3 class='list-item'>${location.city}, ${location.country}</h3></li>`;
     $('#city-list').append(locationVisited);
+    let myLatLng = new google.maps.LatLng(parseInt(location.lat), parseInt(location.long));
+    let marker = new google.maps.Marker({
+      position: myLatLng,
+      map: map
+    });
   });
 }
 
