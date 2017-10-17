@@ -131,8 +131,22 @@ function createNewLocation (req, res) {
       })
       //save update to userrecord
 
-    }//end else userrecord
+      userrecord.save(function(err, savedUser){
+        //and save a new location
+        newLocation.save(function(err, data) {
+          if (err) {
+            console.log('Error saving location item to DB.', err);
+            res.status(500).send('Internal server error');
+          } else {
+            console.log;
+             res.redirect('/dashboard', { user: req.user });
+           // res.status(201).json(data);
+          }
+        });
+      });
 
+
+    }//end else userrecord
   });
 }
 
