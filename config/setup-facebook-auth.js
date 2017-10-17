@@ -28,11 +28,11 @@ function setupFacebookAuthStrategy(passport){
 			db.User.findOne({'fb.Id': profile.id}, function(err,user){
 				if(err){
 					done(err);
-				}else if(user){
-					done(null,user);
+				// }else if(user){
+				// 	done(null,user);
 				}else{
 					db.User.findOne({'id': profile.id}, function(err,user){
-						if(user){
+						if(!user){
 							const newUser = new db.User({
 								id: profile.id,
 								access_token: access_token,
@@ -49,6 +49,8 @@ function setupFacebookAuthStrategy(passport){
 									done(null, newUser);
 								}
 							});
+						}else if(user){
+							done(null, user);
 						}
 					})
 				}
