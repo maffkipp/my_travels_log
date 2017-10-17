@@ -32,7 +32,7 @@ function setupFacebookAuthStrategy(passport){
 					done(null,user);
 				}else{
 					db.User.findOne({'id': profile.id}, function(err,user){
-						if(user){
+						if(!user){
 							const newUser = new db.User({
 								id: profile.id,
 								access_token: access_token,
