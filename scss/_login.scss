@@ -2,14 +2,24 @@ body {
   background-color: $yellow;
 }
 
+
 .login-container {
   width: 50%;
   margin: 0 auto;
   box-shadow: $box-shadow;
   padding: 50px;
-  margin-top: 50px;
+  margin-top: 15px;
   background-color: white;
   border-radius: 2px;
+
+  h1 {
+    text-align: center;
+    margin-bottom:10px;
+  }
+
+  form {
+    margin: 0 auto;
+  }
 }
 
 h1 {
@@ -17,6 +27,7 @@ h1 {
   font-family: $raleway;
   padding-bottom: 30px;
 }
+
 
 #center {
   margin: 0 auto;

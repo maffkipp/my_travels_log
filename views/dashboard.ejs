@@ -9,16 +9,20 @@
 <body>
 
   <div class='container'>
-    <header>
+    <header class="dashboard-header">
       <img class='logo' src= '/img/icon-placeholder.png'>
 
       <div class='login-info'>
         <img class='profile-pic' src='<%= user.profilePhoto %>'>
-        <p class='username'><%= user.firstName + ' ' + user.lastName %></p>
+        <p class='username'>
+          <%= user.firstName + ' ' + user.lastName %>
+        </p>
+           <a href="/logout">logout</a>
+
       </div>
     </header>
     <div id='map'></div>
-    <button id='display-switch'>Switch Display</button>
+    <button id='display-switch'>Add City</button>
 
     <ul id='city-list'></ul>
 
