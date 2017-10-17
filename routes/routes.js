@@ -81,6 +81,8 @@ function createNewLocation (req, res) {
     } else {
 
       //create a newlocation for that user
+
+
       const newLocation = new db.Location({
         long: req.body.long,
         lat: req.body.lat,
@@ -89,27 +91,20 @@ function createNewLocation (req, res) {
         visitDate: req.body.visitDate
       });
 
+      // if(db.locations.includes(newLocation.))
 
-      //establishing reference for user having a new location
-      //this User has this location
-      userrecord.locations.push(newLocation);
-
-      //the location has this User as its parent.
-      newLocation.createdBy = userrecord;
-
-      //save update to userrecord
-      userrecord.save(function(err, savedUser){
-        //and save a new location
-        newLocation.save(function(err, data) {
-          if (err) {
-            console.log('Error saving location item to DB.', err);
-            res.status(500).send('Internal server error');
-          } else {
-             res.render('dashboard', { user: req.user });
-           // res.status(201).json(data);
+      db.Location.findOne({city: newLocation.city}, function (err,loc){
+        if(err){
+          console.log("err");
+        }else{
+          if(loc){
+            console.log(newLocation); 
+          }else{
+            console.log('city not already there');
           }
-        });
-      });
+        }
+      })
+
     }//end else userrecord
 
   });
