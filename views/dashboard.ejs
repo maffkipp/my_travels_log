@@ -22,8 +22,6 @@
          [<a href='/logout'>logout</a>]
       </article>
 
-
-
     </header>
 
     <div id='map'></div>
@@ -43,11 +41,11 @@
         </div>
         <div>
           <label>Longitude</label>
-          <input name='long' id='long'>
+          <input type='hidden' name='long' id='long'>
         </div>
         <div>
           <label>Latitude</label>
-          <input name='lat' id='lat'>
+          <input type='hidden' name='lat' id='lat'>
         </div>
         <div>
           <input id='form-userid' type='hidden' name='userid' value='<%= user._id %>'>
