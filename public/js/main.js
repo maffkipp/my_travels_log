@@ -73,11 +73,13 @@ function displaySwitch() {
   if (toggle === 0) {
     $('#city-list').fadeToggle(200, function() {
       $('#location-form').fadeToggle(200);
+       $('#display-switch').html('Display Locations');
       toggle = 1;
     });
   } else {
     $('#location-form').fadeToggle(200, function() {
       $('#city-list').fadeToggle(200);
+       $('#display-switch').html('Add City');
       toggle = 0;
     });
   }
