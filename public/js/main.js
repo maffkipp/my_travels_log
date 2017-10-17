@@ -13,10 +13,12 @@ $(document).ready(function() {
   console.log(formUserId);
   // initialize the map
   initMap();
-  // assign event handler to display switch button
+
+  // assign event handler to display add location button
   $('#display-switch').click( function() {
     displaySwitch();
   });
+
 
   $.ajax({
     method: 'GET',
@@ -55,11 +57,13 @@ function displaySwitch() {
   if (toggle === 0) {
     $('#city-list').fadeToggle(200, function() {
       $('#location-form').fadeToggle(200);
+      $('#display-switch').html('Display My Locations');
       toggle = 1;
     });
   } else {
     $('#location-form').fadeToggle(200, function() {
       $('#city-list').fadeToggle(200);
+      $('#display-switch').html('Create New Location');
       toggle = 0;
     });
   }

@@ -16,6 +16,11 @@ header {
   display: flex;
   justify-content: space-between; }
 
+header > article {
+  flex:3;
+  flex-direction: row;
+}
+
 .logo {
   height: 75px; }
 

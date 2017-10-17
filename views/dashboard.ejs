@@ -10,15 +10,24 @@
 
   <div class='container'>
     <header>
-      <img class='logo' src= '<%= user.profilePhoto %>'>
+      <article>
+        <img class='logo' src= 'img/icon-placeholder.png'>
+      </article>
+      <article>
+        <h2 class='username'> MyTravels</h2>
+      </article>
+      <article class="profile-wrap">
+         <img class='profileimg' src= '<%= user.profilePhoto %>'>
+          <%= user.firstName + ' ' + user.lastName %>
+         [<a href='/logout'>logout</a>]
+      </article>
 
-      <p class='username'><%= user.firstName + ' ' + user.lastName %>, <%= user._id %>
 
-      </p>
+
     </header>
-    <div id='map'></div>
-    <button id='display-switch'>Switch Display</button>
 
+    <div id='map'></div>
+    <button id='display-switch'>Create New Location</button>
     <ul id='city-list'></ul>
 
     <form id='location-form' action='/users/<%= user._id %>/location' method='post'>
@@ -47,6 +56,8 @@
     </form>
 
   </div>
+
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="/js/main.js" type="text/javascript"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV06Rqe2o_LP8qqrSeusRqs2VSNxAFMrU"></script>
