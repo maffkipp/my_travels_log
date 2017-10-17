@@ -10,9 +10,12 @@
 
   <div class='container'>
     <header>
-      <img class='logo' src= '<%= user.profilePhoto %>'>
+      <img class='logo' src= '/img/icon-placeholder.png'>
 
-      <p class='username'><%= user.firstName + ' ' + user.lastName %></p>
+      <div class='login-info'>
+        <img class='profile-pic' src='<%= user.profilePhoto %>'>
+        <p class='username'><%= user.firstName + ' ' + user.lastName %></p>
+      </div>
     </header>
     <div id='map'></div>
     <button id='display-switch'>Switch Display</button>
@@ -30,14 +33,8 @@
           <label>Country</label>
           <input name='country' id='country'>
         </div>
-        <div>
-          <label>Longitude</label>
           <input type='hidden' name='long' id='long'>
-        </div>
-        <div>
-          <label>Latitude</label>
           <input type='hidden' name='lat' id='lat'>
-        </div>
         <div>
           <input id='form-userid' type='hidden' name='userid' value='<%= user._id %>'>
         <button type='submit'>Submit</button>
