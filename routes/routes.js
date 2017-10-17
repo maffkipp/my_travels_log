@@ -88,7 +88,7 @@ function createNewLocation (req, res) {
         country: req.body.country,
         visitDate: req.body.visitDate
       });
-      newLocation.findLatLong();
+
 
       //establishing reference for user having a new location
       //this User has this location
