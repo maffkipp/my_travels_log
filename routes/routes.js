@@ -97,7 +97,40 @@ function createNewLocation (req, res) {
       //the location has this User as its parent.
       newLocation.createdBy = userrecord;
 
+      //creates obj based on the new obj excluding the visit date, only creates it if it does not exist
+      //alternatively, just send newLocation into the function if we want locations with separate visit dates
+      //to count as separate entries
+      var compareObj = {
+        long: newLocation.long,
+        lat: newLocation.lat,
+        city: newLocation.city,
+        country: newLocation.country,
+      }
+      db.Location.findOne(compareObj, function(err,loc){
+           if(err){
+              console.log("error")
+           }else{
+              if(loc){
+                console.log('Location already exists!');
+                res.send("Location Already exists");
+              }else{
+                  userrecord.save(function(err, savedUser){
+                    //and save a new location
+                    newLocation.save(function(err, data) {
+                      if (err) {
+                        console.log('Error saving location item to DB.', err);
+                        res.status(500).send('Internal server error');
+                      } else {
+                         res.render('dashboard', { user: req.user });
+                       // res.status(201).json(data);
+                      }
+                    });
+                  });    
+              }
+           }
+      })
       //save update to userrecord
+
       userrecord.save(function(err, savedUser){
         //and save a new location
         newLocation.save(function(err, data) {
@@ -105,13 +138,15 @@ function createNewLocation (req, res) {
             console.log('Error saving location item to DB.', err);
             res.status(500).send('Internal server error');
           } else {
-             res.render('dashboard', { user: req.user });
+            console.log;
+             res.redirect('/dashboard', { user: req.user });
            // res.status(201).json(data);
           }
         });
       });
-    }//end else userrecord
 
+
+    }//end else userrecord
   });
 }
 
