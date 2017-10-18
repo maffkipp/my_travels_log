@@ -10,15 +10,14 @@
 
   <div class='container'>
     <header class="dashboard-header">
-      <img class='logo' src= '/img/icon-placeholder.png'>
+      <img class='logo' src= '/img/traveler_logo_book.png'>
 
       <div class='login-info'>
-        <img class='profile-pic' src='<%= user.profilePhoto %>'>
         <p class='username'>
-          <%= user.firstName + ' ' + user.lastName %>
+          <%= user.firstName + ' ' + user.lastName %><br>
+          <a href="/logout">logout</a>
         </p>
-           <a href="/logout">logout</a>
-
+        <img class='profile-pic' src='<%= user.profilePhoto %>'>
       </div>
     </header>
     <div id='map'></div>
