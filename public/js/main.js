@@ -53,10 +53,13 @@ function appendLocation(location) {
                         <h3 class='list-item'>
                         ${location.city}, ${location.country}
                         </h3>
-                        <input id='${location._id}' class='delete-btn' type='button' onClick='deleteUserLocation(this.id);' value='X'>
+                        <input id='${location._id}-btn' class='delete-btn' type='button' value='X'>
                         </li>`;
   $('#city-list').append(locationVisited);
-
+  $(`#${location._id}-btn`).click(function() {
+    deleteUserLocation(location._id);
+    $(`#${location._id}`).remove();
+  });
 }
 
 // gets latitude and longitude for location entered
@@ -103,23 +106,21 @@ function displaySwitch() {
   }
 }
 
-function deleteUserLocation(locationsId, lastdelete) {
-    var deleteThang = locationsId;
+function deleteUserLocation(locationId) {
     console.log('i felt that dlt btn pressed.');
-    console.log('/locations/' + deleteThang);
+    console.log('/locations/' + locationId);
 
     $.ajax({
-      method: 'DELETE',
-      url: '/locations/' + deleteThang,
+      method: 'delete',
+      url: '/locations/' + locationId,
       dataType: 'JSON',
       success: onSuccessDeleteLocation,
       error: onErrorDeleteLocation
-    });
+    })
 }
 
 function onSuccessDeleteLocation(responseData){
   console.log('onSuccessDeleteLocation was called.');
-  console.log('i am SUCCESS responseData' +  JSON.stringify(responseData));
 
   // var killthis = document.getElementById('#')
 }

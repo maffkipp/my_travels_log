@@ -117,20 +117,16 @@ function createNewLocation (req, res) {
   })
 }
 
-// TODO: delete a user's location record.
 function deleteUserLocation(req, res) {
 
-  var thang = req.params.locationid;
-  console.log(thang +'ima delete this.');
-  db.Location.findByIdAndRemove(req.params.locationid, function(err,data) {
+  var locationId = req.params.locationid;
+  db.Location.findOneAndRemove({_id: locationId}, function(err,data) {
     if(err){
-      console.log('error deleting location record');
       res.status(500).send('Internal Server Error. Totes my bad.');
     } else {
-      //delete that thang
-      console.log('oops, i deleted that ' +thang+ 'thang. im not that innocent.');
+      console.log('Successful Delete');
     }
-  })
+  });
 }
 
 // Get all user's locations
@@ -147,6 +143,16 @@ function getUserLocations(req, res) {
   });
 }
 
+function getLocation(req, res) {
+  var locationId = req.params.locationid;
+  db.Location.findOne({_id: locationId}, function(err, data) {
+    if(err) {
+      res.status(500).send('Internal Server Error');
+    } else {
+      res.json(data);
+    }
+  });
+}
 // TODO: Update/Put a user's location record
 
 // TODO: delete a user's location record.
