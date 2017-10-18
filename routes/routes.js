@@ -67,53 +67,6 @@ function updateUser(req, res) {
 
 /* LOCATION CRUD ROUTE FUNCTIONS
 ********************************/
-
-// function searchUserCities(userData, loc){
-//   userData.populate('Location').exec(function(err, user){
-//     if(err){
-//       return handleError(err);
-//     }else{
-//       console.log('The locations includes' + user.Location.city);
-//     }
-//   })
-// }
-
-
-function saveMyLoc(userData, loc){
-
-  userData.locations.push(loc);
-  loc.createdBy = userData.id;
-  userData.save(function(err,saved){
-    loc.save(function(err,data){
-      if(err){
-        console.log()
-      }
-    })
-
-  }) 
-  //     //establishing reference for user having a new location
-  //     //this User has this location
-  //     userrecord.locations.push(newLocation);
-
-  //     //the location has this User as its parent.
-  //     newLocation.createdBy = userrecord;
-
-  //     //save update to userrecord
-  //     userrecord.save(function(err, savedUser){
-  //       //and save a new location
-  //       newLocation.save(function(err, data) {
-  //         if (err) {
-  //           console.log('Error saving location item to DB.', err);
-  //           res.status(500).send('Internal server error');
-  //         } else {
-  //            res.render('dashboard', { user: req.user });
-  //          // res.status(201).json(data);
-  //         }
-  //       });
-  //     });
-  //   }//end else userrecord
-
-}
 //Create location
 function createNewLocation (req, res) {
   var userid = req.params.userid;
@@ -126,60 +79,44 @@ function createNewLocation (req, res) {
     visitDate: req.body.visitDate
   })
 
-  //search for existing user
-  db.User.findById(userid).populate('locations').exec(function(err, story){
-    console.log(story);
+  //Find the user on the database, populate its locations array
+  db.User.findById(userid).populate('locations').exec(function(err,user){
+    //for each obj in locations(after populating), 
+    //check if the city and country names match the 'new' loc
+    //if they do, dont add, since it already exists
+
+    var exist = false;
+    for(let el of user.locations){
+        if(el.city === newLocation.city && el.country === newLocation.country){
+          console.log('That city already exists!');
+          var exist = true;
+          // res.render('dashboard', {user: req.user});
+          break;
+        }
+        // res.render('dashboard', {user: req.user});
+     }
+     if(!exist){
+                  //add location to user, set the creator to the location
+            user.locations.push(newLocation);
+            newLocation.createdBy = user;
+            //save user and location
+            newLocation.save(function(err,data){
+              if(err){
+                console.log("Could not save location.");
+              }else{
+                console.log('Location saved!');
+              }
+            })
+            user.save(function(err, savedUser){
+              if(err){
+                console.log("Could not save user.");
+              }else{
+                console.log("User Saved!");
+              }
+            });      
+     }
+     res.render('dashboard',{user: req.user});
   })
-
-  // db.Location.findOne({city: newLocation.city}, function(err,city){
-  //   if(err){
-  //     done(err)
-  //   }else{
-  //     console.log(city + ' '+ user.firstName);
-  //   }
-  // })
-
-
-  //find the user
-  // db.User.findById(userid, function(err, userrecord){
-
-  //   if(err){
-  //     console.log('errored on user find by id');
-  //   } else {
-
-  //     //create a newlocation for that user
-  //     const newLocation = new db.Location({
-  //       long: req.body.long,
-  //       lat: req.body.lat,
-  //       city: req.body.city,
-  //       country: req.body.country,
-  //       visitDate: req.body.visitDate
-  //     });
-
-
-  //     //establishing reference for user having a new location
-  //     //this User has this location
-  //     userrecord.locations.push(newLocation);
-
-  //     //the location has this User as its parent.
-  //     newLocation.createdBy = userrecord;
-
-  //     //save update to userrecord
-  //     userrecord.save(function(err, savedUser){
-  //       //and save a new location
-  //       newLocation.save(function(err, data) {
-  //         if (err) {
-  //           console.log('Error saving location item to DB.', err);
-  //           res.status(500).send('Internal server error');
-  //         } else {
-  //            res.render('dashboard', { user: req.user });
-  //          // res.status(201).json(data);
-  //         }
-  //       });
-  //     });
-  //   }//end else userrecord
-
-  // });
 }
 
 
