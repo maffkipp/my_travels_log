@@ -13,15 +13,15 @@
 	  <h3>Track your rad travels.</h3>
 	</header>
   <div class='login-container'>
-    <h1>Log In with Facebook</h1>
     <% if(user!= undefined){ %>
-      <h2>Below is the data from Facebook</h2>
-      <pre>
-        <%= user.fb %>
-      </pre>
-      <a href="/logout">Log out</a>
+      <form method='get' action='/dashboard#_=_'>
+        <button>Dashboard</button>
+      </form>
+      <form method='get' action='/logout'>
+        <button>Logout</button>
+      </form>
     <% }else{ %>
-
+      <h1>Log In with Facebook</h1>
       <form id='center' action='/auth/facebook' method='get'>
         <button class="loginBtn loginBtn--facebook">Login with Facebook</button>
       </form>
