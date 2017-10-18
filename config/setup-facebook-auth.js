@@ -20,14 +20,14 @@ function setupFacebookAuthStrategy(passport){
 	const strategyObj = {
 		clientID: process.env.FACEBOOK_APP_ID,
 		clientSecret: process.env.FACEBOOK_APP_SECRET,
-		callbackURL: 'http://localhost:3000/auth/facebook/callback',
+		callbackURL: 'https://my-travels-log.herokuapp.com/auth/facebook/callback',
 		enableProof: true,
 		profileFields: ['name','emails','photos'],
 	};
 
 
-	/*Uses passport,not sure what strategy is but it finds users in our database by a 
-	facebook id (first findOne), then if that user exists, it finds the user by its id on 
+	/*Uses passport,not sure what strategy is but it finds users in our database by a
+	facebook id (first findOne), then if that user exists, it finds the user by its id on
 	our mongoDB database(second findOne) to avoid duplicates. If mongo user is not found, it takes
 	the facebook profile info and makes new mongo user and saves it, else if user is found
 	it simply continues with that user */
