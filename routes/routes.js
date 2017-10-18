@@ -1,7 +1,7 @@
 const db = require('../models');
 const user = require('../models/user');
 const location = require('../models/location');
-
+const mongoose = require('mongoose');
 
 /* WEB PAGE ROUTING
 *********************/
@@ -68,19 +68,16 @@ function updateUser(req, res) {
 /* LOCATION CRUD ROUTE FUNCTIONS
 ********************************/
 
-function searchUserCities(userData, loc){
-  userData.locations.forEach((cityId)=>{
-      db.Location.findById(cityId, function(err,cityObj){
-        console.log(cityObj);
+// function searchUserCities(userData, loc){
+//   userData.populate('Location').exec(function(err, user){
+//     if(err){
+//       return handleError(err);
+//     }else{
+//       console.log('The locations includes' + user.Location.city);
+//     }
+//   })
+// }
 
-        if(cityObj.city === loc.city && cityObj.country === loc.country){
-          console.log('User already visited this city!');
-        }else{
-          saveMyLoc(userData,loc);
-        }
-      })
-    })
-}
 
 function saveMyLoc(userData, loc){
 
@@ -130,15 +127,9 @@ function createNewLocation (req, res) {
   })
 
   //search for existing user
-  var user;
-  db.User.findById(userid, function(err, userRecord){
-    if(err){
-      done(err);
-    }else{
-      console.log(userRecord);
-      searchUserCities(userRecord, newLocation);
-    }
-  });
+  db.User.findById(userid).populate('locations').exec(function(err, story){
+    console.log(story);
+  })
 
   // db.Location.findOne({city: newLocation.city}, function(err,city){
   //   if(err){
