@@ -106,7 +106,7 @@ function displaySwitch() {
 function deleteUserLocation(locationsId) {
     var deleteThang = locationsId;
     console.log('i felt that dlt btn pressed.');
-    console.log('I AM: ' + deleteThang);
+    console.log('/locations/' + deleteThang);
 
     $.ajax({
       method: 'DELETE',
