@@ -49,14 +49,17 @@ function onSuccess(responseData) {
 
 // creates a list item for a location
 function appendLocation(location) {
-  let locationVisited = `<li class='place-visited'>
+  let locationVisited = `<li id='${location._id}' class='place-visited'>
                         <h3 class='list-item'>
                         ${location.city}, ${location.country}
                         </h3>
-                        <input id='${location._id}' class='delete-btn' type='button' onClick='deleteUserLocation(this.id);' value='X'>
+                        <input id='${location._id}-btn' class='delete-btn' type='button' value='X'>
                         </li>`;
   $('#city-list').append(locationVisited);
-
+  $(`#${location._id}-btn`).click(function() {
+    deleteUserLocation(location._id);
+    $(`#${location._id}`).remove();
+  });
 }
 
 // gets latitude and longitude for location entered
@@ -82,7 +85,7 @@ function latLongSuccess(responseData) {
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 0, lng: 0},
-    zoom: 2
+    zoom: 1
   });
 }
 
@@ -103,25 +106,28 @@ function displaySwitch() {
   }
 }
 
-function deleteUserLocation(locationsId) {
-    var deleteThang = locationsId;
+function deleteUserLocation(locationId) {
     console.log('i felt that dlt btn pressed.');
-    console.log('I AM: ' + deleteThang);
+    console.log('/locations/' + locationId);
 
     $.ajax({
-      method: 'DELETE',
-      url: '/locations/' + deleteThang,
-      dataType: 'json',
+      method: 'delete',
+      url: '/locations/' + locationId,
+      dataType: 'JSON',
       success: onSuccessDeleteLocation,
       error: onErrorDeleteLocation
-    });
+    })
 }
 
 function onSuccessDeleteLocation(responseData){
   console.log('onSuccessDeleteLocation was called.');
+
+  // var killthis = document.getElementById('#')
 }
 
-function onFailureDeleteLocation(responseData){
-  console.log('I am like totes erroring out from ajax delete');
+function onErrorDeleteLocation(responseData){
+
+  console.log('I am like totes erroring out from ajax');
+  console.log('i am failure responseData' +  JSON.stringify(responseData));
 }
 

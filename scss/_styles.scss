@@ -125,7 +125,44 @@ p {
   padding: 10px 0;
   border-radius: $rounded;
   background-color: white;
-}
+  position: relative;
+
+
+   .delete-btn {
+    position:absolute;
+    right:5px;
+    top:5px;
+    background-color: $light-grey;
+    font-family: $raleway;
+    font-size: 40px;
+    border: none;
+    border-radius: $rounded;
+    color: $red;
+    //trial error
+    background-image: -webkit-linear-gradient(top, $light-grey, $dark-grey);
+    background-image: linear-gradient(top, #f4f1ee, #fff);
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    box-shadow: $box-shadow;
+    -webkit-transition: all .1s linear;
+    transition: all .1s linear;
+   }
+
+   .delete-button:after{
+      color:#e9e6e4;
+      content: "";
+      display: block;
+      font-size: 30px;
+      height: 30px;
+      text-decoration: none;
+      text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
+      position: absolute;
+      width: 30px;
+    }
+
+
+} //close place-visited
 
 .list-item {
   margin: 0;
