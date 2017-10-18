@@ -170,6 +170,20 @@ function getUserLocations(req, res) {
 
 // TODO: delete a user's location record.
 
+function getStats(req,res){
+  var userId = req.params.id;
+  var countries,cities;
+  db.User.findById(userId, function(err,users){
+    if(err){
+      console.log('Could not find user.');
+    }else{
+      // console.log(users);
+      res.json(users);
+    }
+  });
+
+  
+}
 
 /* EXPORT FUNCTIONS
 ********************************/
@@ -181,5 +195,6 @@ module.exports = {
   createNewUser: createNewUser,
   getUsers: getUsers,
   updateUser: updateUser,
-  deleteUserLocation: deleteUserLocation
+  deleteUserLocation: deleteUserLocation,
+  getStats: getStats
 }
