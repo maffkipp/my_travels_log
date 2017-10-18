@@ -75,6 +75,8 @@ app.post('/users', appRoutes.createNewUser); //populate new user in account
 app.get('/users', appRoutes.getUsers); //get all users
 app.put('/users/:id', appRoutes.updateUser)//add location key to existing user
 
+//FRAN EXPIRIMENTS
+app.get('/users/:id/stats', appRoutes.getStats);
 
 // RUN SERVER
 app.listen(port,function(){

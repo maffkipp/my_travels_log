@@ -157,6 +157,48 @@ function getLocation(req, res) {
 
 // TODO: delete a user's location record.
 
+function getStats(req,res){
+  var userId = req.params.id;
+  var objStuff = getCountriesCount(userId);
+  var countries,cities;
+
+  db.User.findById(userId).populate('locations').exec(function(err,user){
+    if(err){
+      console.log('Could not find user.');
+    }else{
+      countries = [];
+      cities = [];
+      
+      for(let el of user.locations){
+        countries.includes(el.country) ? el : countries.push(el.country);
+        cities.includes(el.city) ? el : cities.push(el.city);
+      }
+
+      var userStats ={
+        Cities: cities,
+        Countries: countries,
+        CityCount: cities.length,
+        CountryCount: countries.length
+      }
+      res.json(userStats);
+    }
+  }); 
+}
+
+function getCountriesCount(userId){
+  
+  // return typeof(countries);
+
+  var obj = [];
+
+  db.User.findById(userId).populate('locations').exec(function(err, user){
+    return user;
+    user.locations.forEach(el =>{
+        obj.push(el);
+    })   
+  });
+  // return obj;
+}
 
 /* EXPORT FUNCTIONS
 ********************************/
@@ -169,5 +211,7 @@ module.exports = {
   getUsers: getUsers,
   updateUser: updateUser,
   deleteUserLocation: deleteUserLocation,
+  getStats: getStats,
   getLocation: getLocation
+
 }
