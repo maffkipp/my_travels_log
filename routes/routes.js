@@ -119,16 +119,37 @@ function createNewLocation (req, res) {
 
 // TODO: delete a user's location record.
 function deleteUserLocation(req, res) {
-  var thang = req.params.locationid;
-  db.Location.findById(req.params.locationid, function(err,data) {
-    if(err){
-      console.log('error deleting location record');
-      res.status(500).send('Internal Server Error. Totes my bad.');
-    } else {
-      //delete that thang
-      console.log('oops, i deleted that ' +thang+ 'thang. im not that innocent.');
-    }
+
+ // ajax call to create list of locations visited
+  $.ajax({
+    method: 'GET',
+    url: '/locations/' + formUserId,
+    dataType: 'json',
+    success: onSuccess
   })
+
+
+
+
+
+
+
+
+
+
+
+  // var thang = req.params.locationid;
+  // console.log(thang +'ima delete this.');
+  // db.Location.findByIdAndRemove(req.params.locationid, function(err,data) {
+  //   if(err){
+  //     console.log('error deleting location record');
+  //     res.status(500).send('Internal Server Error. Totes my bad.');
+  //   } else {
+  //     //delete that thang
+  //      res.render('dashboard', { user: req.user });
+  //     console.log('oops, i deleted that ' +thang+ 'thang. im not that innocent.');
+  //   }
+  // })
 }
 
 // Get all user's locations
