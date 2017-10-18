@@ -81,22 +81,19 @@ function createNewLocation (req, res) {
 
   //Find the user on the database, populate its locations array
   db.User.findById(userid).populate('locations').exec(function(err,user){
-    //for each obj in locations(after populating), 
-    //check if the city and country names match the 'new' loc
-    //if they do, dont add, since it already exists
-
-    var exist = false;
+    /*for each obj in locations(after populating), 
+    check if the city and country names match the 'new' loc
+    if they do, dont add, since it already exists*/
+    var exist = false; //toggle for when a city is found
     for(let el of user.locations){
         if(el.city === newLocation.city && el.country === newLocation.country){
           console.log('That city already exists!');
           var exist = true;
-          // res.render('dashboard', {user: req.user});
           break;
         }
-        // res.render('dashboard', {user: req.user});
      }
-     if(!exist){
-                  //add location to user, set the creator to the location
+     if(!exist){//if city not found
+            //add location to user, set the creator to the location
             user.locations.push(newLocation);
             newLocation.createdBy = user;
             //save user and location
