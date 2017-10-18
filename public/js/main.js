@@ -49,7 +49,7 @@ function onSuccess(responseData) {
 
 // creates a list item for a location
 function appendLocation(location) {
-  let locationVisited = `<li class='place-visited'>
+  let locationVisited = `<li id='${location._id}' class='place-visited'>
                         <h3 class='list-item'>
                         ${location.city}, ${location.country}
                         </h3>
@@ -82,7 +82,7 @@ function latLongSuccess(responseData) {
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 0, lng: 0},
-    zoom: 2
+    zoom: 1
   });
 }
 
@@ -103,7 +103,7 @@ function displaySwitch() {
   }
 }
 
-function deleteUserLocation(locationsId) {
+function deleteUserLocation(locationsId, lastdelete) {
     var deleteThang = locationsId;
     console.log('i felt that dlt btn pressed.');
     console.log('/locations/' + deleteThang);
@@ -111,7 +111,7 @@ function deleteUserLocation(locationsId) {
     $.ajax({
       method: 'DELETE',
       url: '/locations/' + deleteThang,
-      dataType: 'json',
+      dataType: 'JSON',
       success: onSuccessDeleteLocation,
       error: onErrorDeleteLocation
     });
@@ -119,9 +119,14 @@ function deleteUserLocation(locationsId) {
 
 function onSuccessDeleteLocation(responseData){
   console.log('onSuccessDeleteLocation was called.');
+  console.log('i am SUCCESS responseData' +  JSON.stringify(responseData));
+
+  // var killthis = document.getElementById('#')
 }
 
-function onFailureDeleteLocation(responseData){
-  console.log('I am like totes erroring out from ajax delete');
+function onErrorDeleteLocation(responseData){
+
+  console.log('I am like totes erroring out from ajax');
+  console.log('i am failure responseData' +  JSON.stringify(responseData));
 }
 
