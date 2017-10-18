@@ -168,5 +168,6 @@ module.exports = {
   createNewUser: createNewUser,
   getUsers: getUsers,
   updateUser: updateUser,
-  deleteUserLocation: deleteUserLocation
+  deleteUserLocation: deleteUserLocation,
+  getLocation: getLocation
 }

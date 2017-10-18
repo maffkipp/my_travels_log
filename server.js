@@ -61,7 +61,7 @@ app.use(express.static('public'));
 const appRoutes  = require('./routes/routes'); //link up routes file
 app.post('/users/:userid/location', appRoutes.createNewLocation); //creating a location to a specific user
 app.get('/locations/:userid', appRoutes.getUserLocations);
-app.get('/locations/:locationid' appRoutes.getLocation);
+app.get('/locations/:locationid', appRoutes.getLocation);
 app.delete('/locations/:locationid', appRoutes.deleteUserLocation);
 
 
