@@ -172,17 +172,45 @@ function getUserLocations(req, res) {
 
 function getStats(req,res){
   var userId = req.params.id;
+  var objStuff = getCountriesCount(userId);
   var countries,cities;
-  db.User.findById(userId, function(err,users){
+
+  db.User.findById(userId).populate('locations').exec(function(err,user){
     if(err){
       console.log('Could not find user.');
     }else{
-      // console.log(users);
-      res.json(users);
-    }
-  });
+      countries = [];
+      cities = [];
+      
+      for(let el of user.locations){
+        countries.includes(el.country) ? el : countries.push(el.country);
+        cities.includes(el.city) ? el : cities.push(el.city);
+      }
 
+      var userStats ={
+        Cities: cities,
+        Countries: countries,
+        CityCount: cities.length,
+        CountryCount: countries.length
+      }
+      res.json(userStats);
+    }
+  }); 
+}
+
+function getCountriesCount(userId){
   
+  // return typeof(countries);
+
+  var obj = [];
+
+  db.User.findById(userId).populate('locations').exec(function(err, user){
+    return user;
+    user.locations.forEach(el =>{
+        obj.push(el);
+    })   
+  });
+  // return obj;
 }
 
 /* EXPORT FUNCTIONS
