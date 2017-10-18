@@ -9,13 +9,19 @@
 <body>
 
   <div class='container'>
-    <header>
-      <img class='logo' src= '<%= user.profilePhoto %>'>
+    <header class="dashboard-header">
+      <img class='logo' src= '/img/traveler_logo_book.png'>
 
-      <p class='username'><%= user.firstName + ' ' + user.lastName %></p>
+      <div class='login-info'>
+        <p class='username'>
+          <%= user.firstName + ' ' + user.lastName %><br>
+          <a href="/logout">logout</a>
+        </p>
+        <img class='profile-pic' src='<%= user.profilePhoto %>'>
+      </div>
     </header>
     <div id='map'></div>
-    <button id='display-switch'>Switch Display</button>
+    <button id='display-switch'>Add City</button>
 
     <ul id='city-list'></ul>
 
@@ -30,14 +36,8 @@
           <label>Country</label>
           <input name='country' id='country'>
         </div>
-        <div>
-          <label>Longitude</label>
           <input type='hidden' name='long' id='long'>
-        </div>
-        <div>
-          <label>Latitude</label>
           <input type='hidden' name='lat' id='lat'>
-        </div>
         <div>
           <input id='form-userid' type='hidden' name='userid' value='<%= user._id %>'>
         <button type='submit'>Submit</button>

@@ -1,72 +1,70 @@
 body {
   background-color: $yellow;
-}
 
-#map {
-  height: 500px;
-  margin: 10px auto;
-  box-shadow: $box-shadow;
-  border-radius: $rounded;
-}
 
-.container {
-  padding: 20px 0;
-  width: 50%;
-  margin: 0 auto;
-}
+  .index-header{
+    @include media-width;
+    margin: 0 auto;
+    text-align: center;
+    margin-top:20px;
 
-header {
-  display: flex;
-  justify-content: space-between;
-}
-
-.logo {
-  height: 75px;
-}
-
-#city-list {
-  padding: 0;
-}
-
-h3 {
-  font-family: $raleway;
-}
-
-p {
-  font-family: $lato;
-}
-
-.place-visited {
-  margin: 10px 0;
-  list-style: none;
-  width: 100%;
-  box-shadow: $box-shadow;
-  padding: 10px 0;
-  border-radius: $rounded;
-  background-color: white;
-}
-
-.list-item {
-  margin: 0;
-  padding: 10px;
-}
-
-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 30px;
-  background-color: $light-grey;
-  font-family: $raleway;
-  border: none;
-  border-radius: $rounded;
-
-  &:hover {
-    background-color: $dark-grey;
-    transition: 200ms;
+    h1, h3 {
+      margin: 0;
+      padding: 0;
+    }
   }
 
-  &:focus {
-    outline: none;
+
+  .container {
+    padding: 20px 0;
+    @include media-width;
+    margin: 0 auto;
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .logo {
+        height: 100px;
+      }
+
+      .login-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .profile-pic {
+          border-radius: 100%;
+          height: 40px;
+          margin-left: 10px;
+        }
+
+        .username {
+          text-align: right;
+
+          a {
+            text-decoration: none;
+            color: $dark-grey;
+            transition: color 150ms;
+            &:hover {
+              color: $light-grey;
+            }
+          }
+        }
+      }
+    }
+
+    #map {
+      height: 500px;
+      margin: 10px auto;
+      box-shadow: $box-shadow;
+      border-radius: $rounded;
+    }
+
+    #city-list {
+      padding: 0;
+    }
   }
 }
 
@@ -110,4 +108,35 @@ button {
     }
   }
 }
+
+h3 {
+  font-family: $raleway;
+}
+
+p {
+  font-family: $lato;
+}
+
+.place-visited {
+  margin: 10px 0;
+  list-style: none;
+  width: 100%;
+  box-shadow: $box-shadow;
+  padding: 10px 0;
+  border-radius: $rounded;
+  background-color: white;
+}
+
+.list-item {
+  margin: 0;
+  padding: 10px;
+}
+
+.logout-btn {
+  text-decoration: none;
+  color: black;
+}
+
+
+
 

@@ -1,0 +1,18 @@
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 30px;
+  background-color: $light-grey;
+  font-family: $raleway;
+  border: none;
+  border-radius: $rounded;
+
+  &:hover {
+    background-color: $dark-grey;
+    transition: 200ms;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}

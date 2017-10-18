@@ -1,6 +1,20 @@
 /* FONT VARIABLES */
 /* CARD STYLE VARIABLES */
 /* COLOR VARIABLES */
+button {
+  display: block;
+  margin: 20px auto;
+  padding: 10px 30px;
+  background-color: #c2c1c2;
+  font-family: "Raleway", sans-serif;
+  border: none;
+  border-radius: 2px; }
+  button:hover {
+    background-color: #595f72;
+    transition: 200ms; }
+  button:focus {
+    outline: none; }
+
 .loginBtn {
   box-sizing: border-box;
   position: relative;
@@ -32,6 +46,7 @@
 
 /* Facebook */
 .loginBtn--facebook {
+  margin: 0 auto;
   background-color: #4C69BA;
   background-image: linear-gradient(#4C69BA, #3B55A0);
   /*font-family: "Helvetica neue", Helvetica Neue, Helvetica, Arial, sans-serif;*/
@@ -47,61 +62,60 @@
   background-image: linear-gradient(#5B7BD5, #4864B1); }
 
 body {
-  background-color: #f5cb5c; }
-
-#map {
-  height: 500px;
-  margin: 10px auto;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
-  border-radius: 2px; }
-
-.container {
-  padding: 20px 0;
-  width: 50%;
-  margin: 0 auto; }
-
-header {
-  display: flex;
-  justify-content: space-between; }
-
-.logo {
-  height: 75px; }
-
-#city-list {
-  padding: 0; }
-
-h3 {
-  font-family: "Raleway", sans-serif; }
-
-p {
-  font-family: "Lato", sans-serif; }
-
-.place-visited {
-  margin: 10px 0;
-  list-style: none;
-  width: 100%;
-  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
-  padding: 10px 0;
-  border-radius: 2px;
-  background-color: white; }
-
-.list-item {
-  margin: 0;
-  padding: 10px; }
-
-button {
-  display: block;
-  margin: 20px auto;
-  padding: 10px 30px;
-  background-color: #e8eddf;
-  font-family: "Raleway", sans-serif;
-  border: none;
-  border-radius: 2px; }
-  button:hover {
-    background-color: #595f72;
-    transition: 200ms; }
-  button:focus {
-    outline: none; }
+  background-color: #c2f970; }
+  body .index-header {
+    width: 50%;
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 20px; }
+    @media only screen and (max-width: 900px) {
+      body .index-header {
+        width: 75%; } }
+    @media only screen and (max-width: 600px) {
+      body .index-header {
+        width: 100%; } }
+    body .index-header h1, body .index-header h3 {
+      margin: 0;
+      padding: 0; }
+  body .container {
+    padding: 20px 0;
+    width: 50%;
+    margin: 0 auto; }
+    @media only screen and (max-width: 900px) {
+      body .container {
+        width: 75%; } }
+    @media only screen and (max-width: 600px) {
+      body .container {
+        width: 100%; } }
+    body .container .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center; }
+      body .container .dashboard-header .logo {
+        height: 100px; }
+      body .container .dashboard-header .login-info {
+        display: flex;
+        align-items: center;
+        justify-content: space-between; }
+        body .container .dashboard-header .login-info .profile-pic {
+          border-radius: 100%;
+          height: 40px;
+          margin-left: 10px; }
+        body .container .dashboard-header .login-info .username {
+          text-align: right; }
+          body .container .dashboard-header .login-info .username a {
+            text-decoration: none;
+            color: #595f72;
+            transition: color 150ms; }
+            body .container .dashboard-header .login-info .username a:hover {
+              color: #c2c1c2; }
+    body .container #map {
+      height: 500px;
+      margin: 10px auto;
+      box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
+      border-radius: 2px; }
+    body .container #city-list {
+      padding: 0; }
 
 #location-form {
   margin-top: 15px;
@@ -124,7 +138,7 @@ button {
   #location-form input {
     width: 100%;
     border: none;
-    border-bottom: 2px solid #e8eddf;
+    border-bottom: 2px solid #c2c1c2;
     height: 30px;
     font-size: 24px;
     color: #595f72;
@@ -132,17 +146,45 @@ button {
     #location-form input:focus {
       outline: none; }
 
+h3 {
+  font-family: "Raleway", sans-serif; }
+
+p {
+  font-family: "Lato", sans-serif; }
+
+.place-visited {
+  margin: 10px 0;
+  list-style: none;
+  width: 100%;
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
+  padding: 10px 0;
+  border-radius: 2px;
+  background-color: white; }
+
+.list-item {
+  margin: 0;
+  padding: 10px; }
+
+.logout-btn {
+  text-decoration: none;
+  color: black; }
+
 body {
-  background-color: #f5cb5c; }
+  background-color: #c2f970; }
 
 .login-container {
   width: 50%;
   margin: 0 auto;
   box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
   padding: 50px;
-  margin-top: 50px;
+  margin-top: 15px;
   background-color: white;
   border-radius: 2px; }
+  .login-container h1 {
+    text-align: center;
+    margin-bottom: 10px; }
+  .login-container form {
+    margin: 0 auto; }
 
 h1 {
   text-align: center;
