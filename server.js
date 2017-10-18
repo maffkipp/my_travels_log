@@ -1,3 +1,7 @@
+/**************
+ MYTRAVELS APP
+**************/
+
 //DEPENDENCIES
 const mongoose = require('mongoose');
 const express = require('express');
@@ -8,11 +12,6 @@ const passport = require('passport');
 const facebook = require('passport-facebook');
 require('dotenv').config();
 
-
-//MONGOOSE CONNECTION
-//Now handled by models/index.js via the routes/route.js (jesse)
-
-
 //APP SETUP
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,7 +19,8 @@ app.set('view engine','ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use(expressSession({secret: 'mySecretKey2'}))
+app.use(expressSession({secret: 'mySecretKey2'}));
+
 //oAuth Setup
 app.use(passport.initialize());
 app.use(passport.session());
@@ -61,6 +61,7 @@ app.use(express.static('public'));
 const appRoutes  = require('./routes/routes'); //link up routes file
 app.post('/users/:userid/location', appRoutes.createNewLocation); //creating a location to a specific user
 app.get('/locations/:userid', appRoutes.getUserLocations);
+app.delete('/locations/:locationid', appRoutes.deleteUserLocation);
 
 
 // These are temporary routes for front-end testing. They can be deleted once OAuth
