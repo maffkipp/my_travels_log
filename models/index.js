@@ -7,7 +7,7 @@ const locationModels = require('./location');
 //fix promise bug
 mongoose.Promise = global.Promise;
 // connect to Mongo DB   // processes from my .env failsafe db (why? just cuz..)
-mongoose.connection.openUri(process.env.DB_CONN, {}, function(err, conn) {
+mongoose.connection.openUri(process.env.DB_CONN || process.env.MONGODB_URI, {}, function(err, conn) {
   if (err) {
     console.log('Error connecting to Mongo DB.', err);
   } else {
