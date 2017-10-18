@@ -105,6 +105,8 @@ function createNewLocation (req, res) {
             console.log('Error saving location item to DB.', err);
             res.status(500).send('Internal server error');
           } else {
+             //res.redirect('/dashboard', { user: req.user });
+
              res.render('dashboard', { user: req.user });
            // res.status(201).json(data);
           }
@@ -115,9 +117,40 @@ function createNewLocation (req, res) {
   });
 }
 
+// TODO: delete a user's location record.
+function deleteUserLocation(req, res) {
+
+ // ajax call to create list of locations visited
+  $.ajax({
+    method: 'GET',
+    url: '/locations/' + formUserId,
+    dataType: 'json',
+    success: onSuccess
+  })
 
 
 
+
+
+
+
+
+
+
+
+  // var thang = req.params.locationid;
+  // console.log(thang +'ima delete this.');
+  // db.Location.findByIdAndRemove(req.params.locationid, function(err,data) {
+  //   if(err){
+  //     console.log('error deleting location record');
+  //     res.status(500).send('Internal Server Error. Totes my bad.');
+  //   } else {
+  //     //delete that thang
+  //      res.render('dashboard', { user: req.user });
+  //     console.log('oops, i deleted that ' +thang+ 'thang. im not that innocent.');
+  //   }
+  // })
+}
 
 // Get all user's locations
 // TODO Jesse: add a query string in server.js and handle getting _id of user record
@@ -147,5 +180,6 @@ module.exports = {
   getUserLocations: getUserLocations,
   createNewUser: createNewUser,
   getUsers: getUsers,
-  updateUser: updateUser
+  updateUser: updateUser,
+  deleteUserLocation: deleteUserLocation
 }

@@ -3,7 +3,6 @@ var map;
 var userid;
 var toggle = 0;
 
-
 // FUNCTION CALLS
 $(document).ready(function() {
 
@@ -29,6 +28,7 @@ $(document).ready(function() {
   $('#location-form').bind('change', function() {
     addLatLong();
   });
+
 });
 
 
@@ -52,8 +52,11 @@ function appendLocation(location) {
   let locationVisited = `<li class='place-visited'>
                         <h3 class='list-item'>
                         ${location.city}, ${location.country}
-                        </h3></li>`;
+                        </h3>
+                        <input id='${location._id}' class='delete-btn' type='button' onClick='deleteUserLocation(this.id);' value='X'>
+                        </li>`;
   $('#city-list').append(locationVisited);
+
 }
 
 // gets latitude and longitude for location entered
@@ -98,5 +101,27 @@ function displaySwitch() {
       toggle = 0;
     });
   }
+}
+
+function deleteUserLocation(locationsId) {
+    var deleteThang = locationsId;
+    console.log('i felt that dlt btn pressed.');
+    console.log('I AM: ' + deleteThang);
+
+    $.ajax({
+      method: 'DELETE',
+      url: '/locations/' + deleteThang,
+      dataType: 'json',
+      success: onSuccessDeleteLocation
+      error: onErrorDeleteLocation
+    });
+}
+
+function onSuccessDeleteLocation(responseData){
+  console.log('onSuccessDeleteLocation was called.');
+}
+
+function onFailureDeleteLocation(responseData){
+  console.log('I am like totes erroring out from ajax delete');
 }
 
