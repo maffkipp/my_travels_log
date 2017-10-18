@@ -112,7 +112,7 @@ function deleteUserLocation(locationsId) {
       method: 'DELETE',
       url: '/locations/' + deleteThang,
       dataType: 'json',
-      success: onSuccessDeleteLocation
+      success: onSuccessDeleteLocation,
       error: onErrorDeleteLocation
     });
 }
