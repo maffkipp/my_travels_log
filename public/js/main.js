@@ -17,6 +17,7 @@ $(document).ready(function() {
     displaySwitch();
   });
 
+  // ajax call to create list of locations visited
   $.ajax({
     method: 'GET',
     url: '/locations/' + formUserId,
@@ -24,6 +25,7 @@ $(document).ready(function() {
     success: onSuccess
   })
 
+  // adds coordinates for locations entered into the form
   $('#location-form').bind('change', function() {
     addLatLong();
   });
@@ -32,10 +34,11 @@ $(document).ready(function() {
 
 // FUNCTIONS
 
+// takes ajax data and places it on the dashboard and map
 function onSuccess(responseData) {
   responseData.forEach(location => {
-    let locationVisited = `<li class='place-visited'><h3 class='list-item'>${location.city}, ${location.country}</h3></li>`;
-    $('#city-list').append(locationVisited);
+    appendLocation(location);
+    // adds map markers
     let myLatLng = new google.maps.LatLng(location.lat, location.long);
     let marker = new google.maps.Marker({
       position: myLatLng,
@@ -44,6 +47,16 @@ function onSuccess(responseData) {
   });
 }
 
+// creates a list item for a location
+function appendLocation(location) {
+  let locationVisited = `<li class='place-visited'>
+                        <h3 class='list-item'>
+                        ${location.city}, ${location.country}
+                        </h3></li>`;
+  $('#city-list').append(locationVisited);
+}
+
+// gets latitude and longitude for location entered
 function addLatLong() {
   var city = $('#city').val();
   var country = $('#country').val();
@@ -55,6 +68,8 @@ function addLatLong() {
   })
 }
 
+// pulls latitude and logitude values from the api and assigns
+// them to hidden form inputs
 function latLongSuccess(responseData) {
   $('#lat').val(responseData.results[0].geometry.location.lat);
   $('#long').val(responseData.results[0].geometry.location.lng);
