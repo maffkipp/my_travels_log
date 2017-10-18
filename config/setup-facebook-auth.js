@@ -26,8 +26,8 @@ function setupFacebookAuthStrategy(passport){
 	};
 
 
-	/*Uses passport,not sure what strategy is but it finds users in our database by a 
-	facebook id (first findOne), then if that user exists, it finds the user by its id on 
+	/*Uses passport,not sure what strategy is but it finds users in our database by a
+	facebook id (first findOne), then if that user exists, it finds the user by its id on
 	our mongoDB database(second findOne) to avoid duplicates. If mongo user is not found, it takes
 	the facebook profile info and makes new mongo user and saves it, else if user is found
 	it simply continues with that user */
