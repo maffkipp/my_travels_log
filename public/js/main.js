@@ -53,7 +53,7 @@ function appendLocation(location) {
                         <h3 class='list-item'>
                         ${location.city}, ${location.country}
                         </h3>
-                        <input id='${location._id}-btn' class='delete-btn' type='button' value='X'>
+                        <a><input id='${location._id}-btn' class='delete-btn' type='button' value='X'></a>
                         </li>`;
   $('#city-list').append(locationVisited);
   $(`#${location._id}-btn`).click(function() {
@@ -108,12 +108,12 @@ function displaySwitch() {
 
 function deleteUserLocation(locationId) {
     console.log('i felt that dlt btn pressed.');
-    console.log('/locations/' + locationId);
+    console.log('/locations/' + locationId + '-btn');
 
     $.ajax({
-      method: 'delete',
+      method: 'DELETE',
       url: '/locations/' + locationId,
-      dataType: 'JSON',
+      dataType: 'json',
       success: onSuccessDeleteLocation,
       error: onErrorDeleteLocation
     })

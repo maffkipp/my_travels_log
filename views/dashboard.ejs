@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
+  <title><%= user.firstName %>'s Travels</title>
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css">
   <link href="https://fonts.googleapis.com/css?family=Lato|Raleway" rel="stylesheet">
   <link rel="stylesheet" type="text/css" href="/styles/application.css">
@@ -11,7 +11,10 @@
   <div class='container'>
     <header class="dashboard-header">
       <img class='logo' src= '/img/traveler_logo_book.png'>
-
+      <div class="title-wrap">
+       <h1>MyTravels</h1>
+       <h3>Track your rad travels.</h3>
+      </div>
       <div class='login-info'>
         <p class='username'>
           <%= user.firstName + ' ' + user.lastName %><br>
