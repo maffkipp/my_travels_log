@@ -1,8 +1,8 @@
 // VARIABLES
 var map,
     userid,
-    markers = [],
-    toggle = 0;
+    toggle = 0,
+    statToggle = 0;
 
 // FUNCTION CALLS
 $(document).ready(function() {
@@ -17,14 +17,9 @@ $(document).ready(function() {
     displaySwitch();
   });
 
-  //assing click event for statistics
+  //passing click event for statistics
   $('#display-stats').click(function(){
-    $.ajax({
-      method: 'GET',
-      url: `/users/${formUserId}/stats`,
-      dataType: 'json',
-      success: statsSuccess
-    })
+    toggleStats();
   })
   // ajax call to create list of locations visited
   populateLocationList();
@@ -38,14 +33,35 @@ $(document).ready(function() {
 
 
 // FUNCTIONS
+
+function toggleStats() {
+  if (statToggle === 0) {
+    statAjaxCall();
+    $('#display-stats').html('Hide Stats');
+    statToggle = 1;
+  } else {
+    $('#stats').remove();
+    $('#display-stats').html('Check Stats');
+    statToggle = 0;
+  }
+}
+
+function statAjaxCall() {
+  $.ajax({
+      method: 'GET',
+      url: `/users/${formUserId}/stats`,
+      dataType: 'json',
+      success: statsSuccess
+    })
+}
+
 //Displays stats on dom
 function statsSuccess(responseData){
   console.log(`We got yer data!`);
   console.log(responseData);
-  var toAppend = `<p>Cities I've Visited: ${responseData.cities}</p>
-                  <p>Number of Cities: ${responseData.cityCount}</p>
-                  <p>Countries I've Visited: ${responseData.countries}</p>
-                  <p>Number of Countries: ${responseData.countryCount}</p>`;
+  var toAppend = `<div id='stats'><p>${responseData.cityCount} Cities Visited</p>
+                  <p>${responseData.countryCount} Countries Visited</p></div>`;
+  $('#stats').remove();
   $('.stats-page').append(toAppend);
 }
 
