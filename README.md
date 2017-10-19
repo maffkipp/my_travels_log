@@ -1,8 +1,7 @@
 # MyTravels App
 MyTravels is a simple app that allows user to signup and login simply with their Facebook account and then build a list of cities they have been to in the world that also creates a google map with map markers of each for their amusement. 
 
-### Live Demo
-[View our live demo](https://my-travels-log.herokuapp.com/)
+### Live Demo [View our live demo](https://my-travels-log.herokuapp.com/)
 
 
 
