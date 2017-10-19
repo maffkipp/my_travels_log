@@ -114,7 +114,37 @@ function createNewLocation (req, res) {
 }
 
 
-// DEPRECATED
+
+// Target delete location functionality
+function patchUserLocations(req, res) {
+  var userIdPut = req.params.userid;
+  var locationIdDelete = req.params.locationid;
+  console.log('user: ' +userIdPut+ " | location: " + locationIdDelete);
+
+  //next loop through user.locations(elements)
+  db.User.findById(userIdPut, function(err, user){
+
+    //if elements !== locationIdDelete variable then push elemet to new array
+    if(err){
+      console.log(err)
+    } else {
+      var index = user.locations.indexOf(locationIdDelete);
+      user.locations.splice(index,1);
+    }
+
+    //save user data
+    user.save(function(err, savedUser){
+      if(err){
+          console.log("Could not save user.");
+      }else{
+          console.log("User Saved!" + user.locations);
+      }
+    });
+  });
+
+}
+
+// DELETE the actual location record from db.Location
 function deleteUserLocation(req, res) {
   console.log('delete loc id requested:' + req.params.locationid);
   var locationId = req.params.locationid;
@@ -127,18 +157,7 @@ function deleteUserLocation(req, res) {
   });
 }
 
-// CORRECT
-function removeUserLocation(req, res) {
-  var userIdPut = req.params.userid;
-  var locationIdDelete = req.params.locationid;
 
-
-
-
-
-
-
-}
 
 // Get all user's locations
 function getUserLocations(req, res) {
@@ -221,8 +240,7 @@ module.exports = {
   getUsers: getUsers,
   updateUser: updateUser,
   deleteUserLocation: deleteUserLocation,
-  removeUserLocation: removeUserLocation,
+  patchUserLocations: patchUserLocations,
   getStats: getStats,
   getLocation: getLocation
-
 }

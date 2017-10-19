@@ -70,6 +70,7 @@ function appendLocation(location) {
                         </li>`;
   $('#city-list').append(locationVisited);
   $(`#${location._id}-btn`).click(function() {
+    updateUserLocationRefRemove(location._id);
     deleteUserLocation(location._id);
     $('.place-visited').remove();
     initMap();
@@ -121,30 +122,52 @@ function displaySwitch() {
   }
 }
 
-function deleteUserLocation(userid, locationId) {
-    console.log('i felt that dlt btn pressed.');
-    console.log('/locations/' + locationId + '-btn');
+
+/**
+UPDATE / PATCH TO REMOVE USER LOCATION REF OF LOCATIONS BEING DELETED.
+**/
+function updateUserLocationRefRemove(locationId) {
     const formUser = $('#form-userid').val();
-    console.log(formUser);
-    //    /users/:userid/:locationid
+    console.log('delete button pressed, I am PATCH to this route: /users/' + formUser + '/' + locationId);
+    $.ajax({
+      method: 'PATCH',
+      url: '/users/' + formUser +'/' + locationId,
+      dataType: 'json',
+      success: onSuccessPatchUserLocations,
+      error: onErrorPatchUserLocations
+    });
+}
+
+function onSuccessPatchUserLocations(responseData){
+  console.log('onSuccessPatchUserLocations was called.' + JSON.stringify(responseData));
+}
+
+function onErrorPatchUserLocations(responseData){
+  console.log('i am AJAX failure responseData from onErrorPatchUserLocations' +  JSON.stringify(responseData));
+}
+
+
+/**
+DELETING A LOCATION BELONGING TO A USER WHO CLICKED A X BUTTON.
+**/
+
+function deleteUserLocation(locationId) {
+    const formUser = $('#form-userid').val();
+    console.log('delete button pressed, I am DELETE to this route: /users/' + formUser + '/' + locationId);
     $.ajax({
       method: 'DELETE',
       url: '/users/' + formUser +'/' + locationId,
       dataType: 'json',
       success: onSuccessDeleteLocation,
       error: onErrorDeleteLocation
-    })
+    });
 }
 
 function onSuccessDeleteLocation(responseData){
-  console.log('onSuccessDeleteLocation was called.');
-
-  // var killthis = document.getElementById('#')
+  console.log('onSuccessDeleteLocation was called.' + JSON.stringify(responseData));
 }
 
 function onErrorDeleteLocation(responseData){
-
-  console.log('I am like totes erroring out from ajax');
-  console.log('i am failure responseData' +  JSON.stringify(responseData));
+  console.log('i am AJAX failure responseData from onErrorDeleteLocation' +  JSON.stringify(responseData));
 }
 
