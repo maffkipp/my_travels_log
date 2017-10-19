@@ -204,10 +204,10 @@ function getStats(req,res){
       }
 
       var userStats ={
-        Cities: cities,
-        Countries: countries,
-        CityCount: cities.length,
-        CountryCount: countries.length
+        cities: cities,
+        countries: countries,
+        cityCount: cities.length,
+        countryCount: countries.length
       }
       res.json(userStats);
     }

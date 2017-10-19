@@ -11,7 +11,8 @@ button {
   border-radius: 2px; }
   button:hover {
     background-color: #595f72;
-    transition: 200ms; }
+    transition: 200ms;
+    cursor: pointer; }
   button:focus {
     outline: none; }
 
@@ -141,6 +142,20 @@ body {
       border-radius: 2px; }
     body .container #city-list {
       padding: 0; }
+
+#button-container {
+  display: flex;
+  justify-content: space-around; }
+
+.stats-page {
+  box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.25);
+  border-radius: 2px;
+  background-color: white; }
+  .stats-page div {
+    display: flex;
+    justify-content: space-around; }
+    .stats-page div p {
+      display: inline; }
 
 #location-form {
   margin-top: 15px;

@@ -1,8 +1,8 @@
 // VARIABLES
 var map,
     userid,
-    markers = [],
-    toggle = 0;
+    toggle = 0,
+    statToggle = 0;
 
 // FUNCTION CALLS
 $(document).ready(function() {
@@ -17,6 +17,10 @@ $(document).ready(function() {
     displaySwitch();
   });
 
+  //passing click event for statistics
+  $('#display-stats').click(function(){
+    toggleStats();
+  })
   // ajax call to create list of locations visited
   populateLocationList();
 
@@ -30,6 +34,63 @@ $(document).ready(function() {
 
 // FUNCTIONS
 
+function toggleStats() {
+  if (statToggle === 0) {
+    statAjaxCall();
+    $('#display-stats').html('Hide Stats');
+    statToggle = 1;
+  } else {
+    $('#stats').remove();
+    $('#display-stats').html('Check Stats');
+    statToggle = 0;
+  }
+}
+
+function statAjaxCall() {
+  $.ajax({
+      method: 'GET',
+      url: `/users/${formUserId}/stats`,
+      dataType: 'json',
+      success: statsSuccess
+    })
+}
+
+//Displays stats on dom
+function statsSuccess(responseData){
+  console.log(`We got yer data!`);
+  console.log(responseData);
+  var toAppend = `<div id='stats'><p>${responseData.cityCount} Cities Visited</p>
+                  <p>${responseData.countryCount} Countries Visited</p></div>`;
+  $('#stats').remove();
+  $('.stats-page').append(toAppend);
+}
+
+
+// Initialize the map API
+function initMap() {
+  map = new google.maps.Map(document.getElementById('map'), {
+    center: {lat: 0, lng: 0},
+    zoom: 1
+  });
+}
+
+// Switch between location form and list of saved locations
+function displaySwitch() {
+  if (toggle === 0) {
+    $('#city-list').fadeToggle(200, function() {
+      $('#location-form').fadeToggle(200);
+       $('#display-switch').html('Display Locations');
+      toggle = 1;
+    });
+  } else {
+    $('#location-form').fadeToggle(200, function() {
+      $('#city-list').fadeToggle(200);
+       $('#display-switch').html('Add City');
+      toggle = 0;
+    });
+  }
+}
+
 function populateLocationList() {
   $.ajax({
     method: 'GET',
@@ -39,25 +100,21 @@ function populateLocationList() {
   })
 }
 
+
 // takes ajax data and places it on the dashboard and map
 function onSuccess(responseData) {
   responseData.forEach(location => {
     appendLocation(location);
-    // adds map markers
-    let myLatLng = new google.maps.LatLng(location.lat, location.long);
-    let marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map
-    });
-    markers.push(marker);
+    addMarker(location);
   });
 }
 
-function deleteAllMarkers() {
-  markers.forEach(marker => {
-    markers[marker].setMap(null);
+function addMarker(location) {
+  let myLatLng = new google.maps.LatLng(location.lat, location.long);
+  let marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map
   });
-  markers = [];
 }
 
 // creates a list item for a location
@@ -66,9 +123,12 @@ function appendLocation(location) {
                         <h3 class='list-item'>
                         ${location.city}, ${location.country}
                         </h3>
-                        <button id='${location._id}-btn'><img src='/img/trash-can-icon.png'></button>
+                        <button id='${location._id}-btn'>
+                        <img src='/img/trash-can-icon.png'>
+                        </button>
                         </li>`;
   $('#city-list').append(locationVisited);
+  
   $(`#${location._id}-btn`).click(function() {
     updateUserLocationRefRemove(location._id);
     deleteUserLocation(location._id);
@@ -121,12 +181,11 @@ function displaySwitch() {
     });
   }
 }
-
-
 /**
 UPDATE / PATCH TO REMOVE USER LOCATION REF OF LOCATIONS BEING DELETED.
 **/
 function updateUserLocationRefRemove(locationId) {
+
     const formUser = $('#form-userid').val();
     console.log('delete button pressed, I am PATCH to this route: /users/' + formUser + '/' + locationId);
     $.ajax({
