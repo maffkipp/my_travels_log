@@ -88,30 +88,33 @@ function createNewLocation (req, res) {
           break;
         }
      }
-     if(!exist){//if city not found
-            //add location to user, set the creator to the location
-            user.locations.push(newLocation);
-            newLocation.createdBy = user;
-            //save user and location
-            newLocation.save(function(err,data){
-              if(err){
-                console.log("Could not save location.");
-              }else{
-                console.log('Location saved!');
-              }
-            })
-            user.save(function(err, savedUser){
-              if(err){
-                console.log("Could not save user.");
-              }else{
-                console.log("User Saved!");
-              }
-            });
-     }
+
+    if(!exist){//if city not found
+          //add location to user, set the creator to the location
+          user.locations.push(newLocation);
+          newLocation.createdBy = user;
+          //save user and location
+          newLocation.save(function(err,data){
+            if(err){
+              console.log("Could not save location.");
+            }else{
+              console.log('Location saved!');
+            }
+          })
+          user.save(function(err, savedUser){
+            if(err){
+              console.log("Could not save user.");
+            }else{
+              console.log("User Saved!");
+            }
+          });
+    }
      res.render('dashboard',{user: req.user});
-  })
+  });
 }
 
+
+// DEPRECATED
 function deleteUserLocation(req, res) {
   console.log('delete loc id requested:' + req.params.locationid);
   var locationId = req.params.locationid;
@@ -122,6 +125,19 @@ function deleteUserLocation(req, res) {
       console.log('Successful Delete');
     }
   });
+}
+
+// CORRECT
+function removeUserLocation(req, res) {
+  var userIdPut = req.params.userid;
+  var locationIdDelete = req.params.locationid;
+
+
+
+
+
+
+
 }
 
 // Get all user's locations
@@ -205,6 +221,7 @@ module.exports = {
   getUsers: getUsers,
   updateUser: updateUser,
   deleteUserLocation: deleteUserLocation,
+  removeUserLocation: removeUserLocation,
   getStats: getStats,
   getLocation: getLocation
 
