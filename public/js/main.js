@@ -17,6 +17,15 @@ $(document).ready(function() {
     displaySwitch();
   });
 
+  //assing click event for statistics
+  $('#display-stats').click(function(){
+    $.ajax({
+      method: 'GET',
+      url: `/users/${formUserId}/stats`,
+      dataType: 'json',
+      success: statsSuccess
+    })
+  })
   // ajax call to create list of locations visited
   populateLocationList();
 
@@ -29,6 +38,17 @@ $(document).ready(function() {
 
 
 // FUNCTIONS
+//Displays stats on dom
+function statsSuccess(responseData){
+  console.log(`We got yer data!`);
+  console.log(responseData);
+  var toAppend = `<p>Cities I've Visited: ${responseData.cities}</p>
+                  <p>Number of Cities: ${responseData.cityCount}</p>
+                  <p>Countries I've Visited: ${responseData.countries}</p>
+                  <p>Number of Countries: ${responseData.countryCount}</p>`;
+  $('.stats-page').append(toAppend);
+}
+
 
 // Initialize the map API
 function initMap() {
@@ -63,6 +83,7 @@ function populateLocationList() {
     success: onSuccess
   })
 }
+
 
 // takes ajax data and places it on the dashboard and map
 function onSuccess(responseData) {
