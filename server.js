@@ -60,9 +60,11 @@ app.use(express.static('public'));
 //Routes and link to route CRUD functions in routes/routes.js
 const appRoutes  = require('./routes/routes'); //link up routes file
 app.post('/users/:userid/location', appRoutes.createNewLocation); //creating a location to a specific user
+app.delete('/users/:userid/:locationid', appRoutes.removeUserLocation); //removing a location to a specific user
 app.get('/locations/:userid', appRoutes.getUserLocations);
 app.get('/locations/:locationid', appRoutes.getLocation);
 app.delete('/locations/:locationid', appRoutes.deleteUserLocation);
+
 
 // Basic Page Routing
 app.get('/', appRoutes.returnHomePage);

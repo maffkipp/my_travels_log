@@ -106,13 +106,15 @@ function displaySwitch() {
   }
 }
 
-function deleteUserLocation(locationId) {
+function deleteUserLocation(userid, locationId) {
     console.log('i felt that dlt btn pressed.');
     console.log('/locations/' + locationId + '-btn');
-
+    const formUser = $('#form-userid').val();
+    console.log(formUser);
+    //    /users/:userid/:locationid
     $.ajax({
       method: 'DELETE',
-      url: '/locations/' + locationId,
+      url: '/users/' + formUser +'/' + locationId,
       dataType: 'json',
       success: onSuccessDeleteLocation,
       error: onErrorDeleteLocation
