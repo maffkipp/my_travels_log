@@ -25,6 +25,7 @@ function setupFacebookAuthStrategy(passport){
 		profileFields: ['name','emails','photos'],
 	};
 
+  // TEST COMMENT PLEASE IGNORE
 
 	/*Uses passport,not sure what strategy is but it finds users in our database by a
 	facebook id (first findOne), then if that user exists, it finds the user by its id on
