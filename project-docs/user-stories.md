@@ -59,7 +59,7 @@ Sprint 3: [Mon Oct 16]
 * Users locations display a pin on the google api map
 * Users can view all locations they've added
 * Users can update/delete locations they've added. 
-
+* Returning users with session cookie auto login.
 
 Sprint 4: [Tues Oct 17]
 
@@ -69,22 +69,25 @@ Sprint 5: [Wed Oct 18]
 Final Sprint: [Thurs Oct 19]
 
 
-
-
-
-
-
-
 ## Post MVP Wishlist
-* User can signup/login without facebook (local auth)
-* Returning users with session cookie auto login.
-* Users can share their map on facebook.
-* users can upload photos
-* users can add comments about their visit.
+
+### high priority
+* Wes - main.js and possibly routes.js 
+   delete doesnt remove map marker
+   deleting or adding a location recalls the AJAX get function that builds all tables? 
+* fran - users can view a stats table that counts how many places, how many cities, how many countries.   dashboard
+* deleteing ref in user db with populate.
+
+###possible
 * users can log the dates.
-* users can view a stats table that counts how many places, how many cities, how many countries.
+* users can add comments about their visit.
+* photos of city displayed from api? 
+
+###not possible w 1 day/low priority
+* User can signup/login without facebook (local auth)
+* Users can share their map on facebook.
+* users can upload photo. 
 * nearby attractions fed about that location. 
 * App figures out if local auth and facebook are same user and routes either to the ssame acct
-* photos of city displayed from api? 
 * user clicks map to have geo coordinates add a location info to the create form as values so when they click add a location, it's all ready for them or they can then click somewhere new to populate the default form values. 
 
