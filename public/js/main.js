@@ -30,72 +30,6 @@ $(document).ready(function() {
 
 // FUNCTIONS
 
-function populateLocationList() {
-  $.ajax({
-    method: 'GET',
-    url: '/locations/' + formUserId,
-    dataType: 'json',
-    success: onSuccess
-  })
-}
-
-// takes ajax data and places it on the dashboard and map
-function onSuccess(responseData) {
-  responseData.forEach(location => {
-    appendLocation(location);
-    // adds map markers
-    let myLatLng = new google.maps.LatLng(location.lat, location.long);
-    let marker = new google.maps.Marker({
-      position: myLatLng,
-      map: map
-    });
-    markers.push(marker);
-  });
-}
-
-function deleteAllMarkers() {
-  markers.forEach(marker => {
-    markers[marker].setMap(null);
-  });
-  markers = [];
-}
-
-// creates a list item for a location
-function appendLocation(location) {
-  let locationVisited = `<li class='place-visited'>
-                        <h3 class='list-item'>
-                        ${location.city}, ${location.country}
-                        </h3>
-                        <button id='${location._id}-btn'><img src='/img/trash-can-icon.png'></button>
-                        </li>`;
-  $('#city-list').append(locationVisited);
-  $(`#${location._id}-btn`).click(function() {
-    deleteUserLocation(location._id);
-    $('.place-visited').remove();
-    initMap();
-    populateLocationList();
-  });
-}
-
-// gets latitude and longitude for location entered
-function addLatLong() {
-  var city = $('#city').val();
-  var country = $('#country').val();
-  $.ajax({
-    method: 'GET',
-    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${country}&key=AIzaSyBV06Rqe2o_LP8qqrSeusRqs2VSNxAFMrU`,
-    dataType: 'json',
-    success: latLongSuccess
-  })
-}
-
-// pulls latitude and logitude values from the api and assigns
-// them to hidden form inputs
-function latLongSuccess(responseData) {
-  $('#lat').val(responseData.results[0].geometry.location.lat);
-  $('#long').val(responseData.results[0].geometry.location.lng);
-}
-
 // Initialize the map API
 function initMap() {
   map = new google.maps.Map(document.getElementById('map'), {
@@ -119,6 +53,73 @@ function displaySwitch() {
       toggle = 0;
     });
   }
+}
+
+function populateLocationList() {
+  $.ajax({
+    method: 'GET',
+    url: '/locations/' + formUserId,
+    dataType: 'json',
+    success: onSuccess
+  })
+}
+
+// takes ajax data and places it on the dashboard and map
+function onSuccess(responseData) {
+  responseData.forEach(location => {
+    appendLocation(location);
+    addMarker(location);
+  });
+}
+
+function addMarker(location) {
+  let myLatLng = new google.maps.LatLng(location.lat, location.long);
+  let marker = new google.maps.Marker({
+    position: myLatLng,
+    map: map
+  });
+}
+
+// creates a list item for a location
+function appendLocation(location) {
+  let locationVisited = `<li class='place-visited'>
+                        <h3 class='list-item'>
+                        ${location.city}, ${location.country}
+                        </h3>
+                        <button id='${location._id}-btn'>
+                        <img src='/img/trash-can-icon.png'>
+                        </button>
+                        </li>`;
+  $('#city-list').append(locationVisited);
+  addDeleteEventHandler(location._id);
+}
+
+function addDeleteEventHandler(locationId) {
+   $(`#${locationId}-btn`).click(function() {
+    deleteUserLocation(locationId);
+    $('.place-visited').remove();
+    initMap();
+    populateLocationList();
+  });
+}
+
+// gets latitude and longitude for location entered
+function addLatLong() {
+  var city = $('#city').val();
+  var country = $('#country').val();
+  $.ajax({
+    method: 'GET',
+    url: `https://maps.googleapis.com/maps/api/geocode/json?address=${city}+${country}&key=AIzaSyBV06Rqe2o_LP8qqrSeusRqs2VSNxAFMrU`,
+    dataType: 'json',
+    success: latLongSuccess
+  })
+}
+
+// pulls latitude and logitude values from the api and assigns
+// them to hidden form inputs
+function latLongSuccess(responseData) {
+  $('#lat').val(responseData.results[0].geometry.location.lat);
+  $('#long').val(responseData.results[0].geometry.location.lng);
 }
 
 function deleteUserLocation(userid, locationId) {
