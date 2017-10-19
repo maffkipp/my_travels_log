@@ -23,13 +23,18 @@
         <img class='profile-pic' src='<%= user.profilePhoto %>'>
       </div>
     </header>
+
     <div id='map'></div>
-    <button id="display-stats">Check Stats</button>
-    <button id='display-switch'>Add City</button>
+
+    <div id='button-container'>
+      <button id='display-switch'>Add City</button>
+      <button id="display-stats">Check Stats</button>
+    </div>
+
+    <section class="stats-page"></section>
 
     <ul id='city-list'></ul>
 
-    <section class="stats-page"></section>
     <form id='location-form' action='/users/<%= user._id %>/location' method='post'>
       <h3>Add a Location</h3>
       <div class='form-container'>

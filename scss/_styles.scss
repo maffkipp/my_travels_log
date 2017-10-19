@@ -104,6 +104,26 @@ body {
   }
 }
 
+#button-container {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stats-page {
+  box-shadow: $box-shadow;
+  border-radius: $rounded;
+  background-color: white;
+
+  div {
+    display: flex;
+    justify-content: space-around;
+
+    p {
+      display: inline;
+    }
+  }
+}
+
 #location-form {
   margin-top: 15px;
   display: none;

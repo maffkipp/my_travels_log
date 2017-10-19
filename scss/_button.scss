@@ -10,6 +10,7 @@ button {
   &:hover {
     background-color: $dark-grey;
     transition: 200ms;
+    cursor: pointer;
   }
 
   &:focus {
