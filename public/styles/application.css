@@ -69,10 +69,10 @@ body {
     margin: 0 auto;
     text-align: center;
     margin-top: 20px; }
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 1000px) {
       body .index-header {
         width: 75%; } }
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 800px) {
       body .index-header {
         width: 100%; } }
     body .index-header h1, body .index-header h3 {
@@ -87,10 +87,10 @@ body {
     padding: 20px 0;
     width: 50%;
     margin: 0 auto; }
-    @media only screen and (max-width: 900px) {
+    @media only screen and (max-width: 1000px) {
       body .container {
         width: 75%; } }
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 800px) {
       body .container {
         width: 100%; } }
     body .container .dashboard-header {

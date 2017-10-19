@@ -1,10 +1,11 @@
 @mixin media-width {
   width: 50%;
-  @media only screen and (max-width: 900px) {
+  @media only screen and (max-width: 1000px) {
     width: 75%;
   }
-  @media only screen and (max-width: 600px) {
+  @media only screen and (max-width: 800px) {
     width: 100%;
   }
+
 }
 

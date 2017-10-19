@@ -19,7 +19,7 @@ function setupFacebookAuthStrategy(passport){
 	const strategyObj = {
 		clientID: process.env.FACEBOOK_APP_ID,
 		clientSecret: process.env.FACEBOOK_APP_SECRET,
-		callbackURL: 'https://my-travels-log.herokuapp.com/auth/facebook/callback',
+		callbackURL: 'http://localhost:3000/auth/facebook/callback',
 		enableProof: true,
 		profileFields: ['name','emails','photos'],
 	};
