@@ -47,11 +47,10 @@ function statsSuccess(responseData){
   console.log(`We got yer data!`);
   console.log(responseData);
   var toAppend = `<p>Cities I've Visited: ${responseData.cities}</p>
-                  <p>Total Cities:</p>
-                  <p>Total Cities:</p>
-                  <p>Total Cities:</p>`;
-  $('#section').append(toAppend);
-
+                  <p>Number of Cities: ${responseData.cityCount}</p>
+                  <p>Countries I've Visited: ${responseData.countries}</p>
+                  <p>Number of Countries: ${responseData.countryCount}</p>`;
+  $('.stats-page').append(toAppend);
 }
 // takes ajax data and places it on the dashboard and map
 function onSuccess(responseData) {
