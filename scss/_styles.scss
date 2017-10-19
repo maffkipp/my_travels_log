@@ -1,23 +1,23 @@
 body {
-  background-color: $yellow;
+  background-image: radial-gradient($green, $dark-green);
 
 
   .index-header{
     @include media-width;
     margin: 0 auto;
     text-align: center;
-    margin-top:20px;
+    margin-top: 20px;
 
 
       h1, h3{
-          flex:1;
-          direction:column;
-          margin:0;
-          padding:0;
+          flex: 1;
+          direction: column;
+          margin: 0;
+          padding: 0 0 10px;
 
         }
         h1 {
-          text-shadow:1px 3px 3px $dark-grey;
+          text-shadow: 0 2px 10px $dark-grey;
           font-size:75px;
         }
   }
@@ -40,23 +40,23 @@ body {
       }
 
       .title-wrap {
-        display:flex;
-        width:300px;
-        position:absolute;
-        top:25px;
-        left:100px;
+        display: flex;
+        width: 300px;
+        position: absolute;
+        top: 25px;
+        left: 100px;
 
         h1, h3{
-          flex:1;
-          direction:column;
-          margin:0;
-          padding:0;
-          position:absolute;
+          flex: 1;
+          direction: column;
+          margin: 0;
+          padding: 0;
+          position: absolute;
         }
         h1 {
-          text-shadow:1px 3px 3px $dark-grey;
-          left:5px;
-          top:0;
+          text-shadow: 0 2px 2px $dark-grey;
+          left: 5px;
+          top: 0;
         }
         h3 {
           left:5px;

@@ -63,7 +63,7 @@ button {
   background-image: linear-gradient(#5B7BD5, #4864B1); }
 
 body {
-  background-color: #c2f970; }
+  background-image: radial-gradient(#e6fcc5, #c2f970); }
   body .index-header {
     width: 50%;
     margin: 0 auto;
@@ -79,9 +79,9 @@ body {
       flex: 1;
       direction: column;
       margin: 0;
-      padding: 0; }
+      padding: 0 0 10px; }
     body .index-header h1 {
-      text-shadow: 1px 3px 3px #595f72;
+      text-shadow: 0 2px 10px #595f72;
       font-size: 75px; }
   body .container {
     padding: 20px 0;
@@ -113,7 +113,7 @@ body {
           padding: 0;
           position: absolute; }
         body .container .dashboard-header .title-wrap h1 {
-          text-shadow: 1px 3px 3px #595f72;
+          text-shadow: 0 2px 2px #595f72;
           left: 5px;
           top: 0; }
         body .container .dashboard-header .title-wrap h3 {
@@ -219,7 +219,7 @@ p {
   color: black; }
 
 body {
-  background-color: #c2f970; }
+  background-image: radial-gradient(#e6fcc5, #c2f970); }
 
 .login-container {
   width: 50%;
