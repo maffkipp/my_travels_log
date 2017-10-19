@@ -3,7 +3,6 @@ const user = require('../models/user');
 const FacebookStrategy = require('passport-facebook').Strategy;
 
 function setupFacebookAuthStrategy(passport){
-	//idk what serialize means specifically but its necessary to log in/out...I think
 	passport.serializeUser(function(user,done){
 		done(null,user._id);
 	});
@@ -20,14 +19,12 @@ function setupFacebookAuthStrategy(passport){
 	const strategyObj = {
 		clientID: process.env.FACEBOOK_APP_ID,
 		clientSecret: process.env.FACEBOOK_APP_SECRET,
-		callbackURL: 'https://my-travels-log.herokuapp.com/auth/facebook/callback',
+		callbackURL: 'http://localhost:3000/auth/facebook/callback',
 		enableProof: true,
 		profileFields: ['name','emails','photos'],
 	};
 
-  // TEST COMMENT PLEASE IGNORE
-
-	/*Uses passport,not sure what strategy is but it finds users in our database by a
+	/*Uses passport, finds users in our database by a
 	facebook id (first findOne), then if that user exists, it finds the user by its id on
 	our mongoDB database(second findOne) to avoid duplicates. If mongo user is not found, it takes
 	the facebook profile info and makes new mongo user and saves it, else if user is found

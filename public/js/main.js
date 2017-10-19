@@ -6,9 +6,6 @@ var map,
 
 // FUNCTION CALLS
 $(document).ready(function() {
-
-  console.log('application is running');
-
   formUserId = $('#form-userid').val();
   // initialize the map
   initMap();
@@ -16,22 +13,17 @@ $(document).ready(function() {
   $('#display-switch').click( function() {
     displaySwitch();
   });
-
   //passing click event for statistics
   $('#display-stats').click(function(){
     toggleStats();
   })
   // ajax call to create list of locations visited
   populateLocationList();
-
   // adds coordinates for locations entered into the form
   $('#location-form').bind('change', function() {
     addLatLong();
   });
-
 });
-
-
 // FUNCTIONS
 
 function toggleStats() {
@@ -185,7 +177,6 @@ function displaySwitch() {
 UPDATE / PATCH TO REMOVE USER LOCATION REF OF LOCATIONS BEING DELETED.
 **/
 function updateUserLocationRefRemove(locationId) {
-
     const formUser = $('#form-userid').val();
     console.log('delete button pressed, I am PATCH to this route: /users/' + formUser + '/' + locationId);
     $.ajax({
@@ -204,12 +195,9 @@ function onSuccessPatchUserLocations(responseData){
 function onErrorPatchUserLocations(responseData){
   console.log('i am AJAX failure responseData from onErrorPatchUserLocations' +  JSON.stringify(responseData));
 }
-
-
 /**
 DELETING A LOCATION BELONGING TO A USER WHO CLICKED A X BUTTON.
 **/
-
 function deleteUserLocation(locationId) {
     const formUser = $('#form-userid').val();
     console.log('delete button pressed, I am DELETE to this route: /users/' + formUser + '/' + locationId);
@@ -229,4 +217,3 @@ function onSuccessDeleteLocation(responseData){
 function onErrorDeleteLocation(responseData){
   console.log('i am AJAX failure responseData from onErrorDeleteLocation' +  JSON.stringify(responseData));
 }
-

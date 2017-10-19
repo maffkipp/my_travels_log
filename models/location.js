@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');  //dependency does the heavier lifting to do the stuff on this page
+const mongoose = require('mongoose');  
 
 const LocationSchema = new mongoose.Schema({
     long: Number,
@@ -9,8 +9,8 @@ const LocationSchema = new mongoose.Schema({
     visitDate: Date
 });
 
-const Location = mongoose.model('Location', LocationSchema); // lets make a model a thing
-
-module.exports = {  // lets export that model
+const Location = mongoose.model('Location', LocationSchema);
+ 
+module.exports = {  
   Location: Location
 }

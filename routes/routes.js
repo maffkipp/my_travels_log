@@ -8,64 +8,15 @@ const mongoose = require('mongoose');
 function returnHomePage (req, res) {
  res.render('index');
 }
-
 function returnDashboardPage (req, res) {
   res.render('dashboard', { user: req.user });
 }
-
-//Francisco todo: On server.js add logic if user is not logged in by oAuth, call returnHomePage, else call returnDashboard
-
-/* USER CRUD ROUTE FUNCTIONS
-********************************/
-
-//temporary to use postman and populate a user record for reference testing
-function createNewUser (req,res) {
-  const newUser = db.User({
-    id: req.body.id,
-    access_token: req.body.access_token,
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    profilePhoto: req.body.profilePhoto,
-    locations: req.body.locations
-  });
-
-  newUser.save(function(err,data) {
-    if(err) {
-      res.status(500).send('internal server error for new user.');
-    } else {
-      res.status(201).json(data);
-    }
-  });
-}
-
-//temporary get all users
-function getUsers(req, res) {
-  db.User.find({}, function(err, data) {
-    if(err) {
-      console.log('Error retrieving locations');
-      res.status(500).send('Internal Server Error');
-    } else {
-      res.json(data);
-    }
-  })
-}
-
-//temporary PUT a specific user so we can add a location after user is created
-function updateUser(req, res) {
-  db.User.findByIdAndUpdate(req.params.id, req.body, function (err, data) {
-    res.json(data);
-  });
-}
-
-
 
 /* LOCATION CRUD ROUTE FUNCTIONS
 ********************************/
 //Create location
 function createNewLocation (req, res) {
   var userid = req.params.userid;
-
   const newLocation = new db.Location({
     long: req.body.long,
     lat: req.body.lat,
@@ -73,8 +24,6 @@ function createNewLocation (req, res) {
     country: req.body.country,
     visitDate: req.body.visitDate
   })
-
-
   //Find the user on the database, populate its locations array
   db.User.findById(userid).populate('locations').exec(function(err,user){
     /*for each obj in locations(after populating),
@@ -88,7 +37,6 @@ function createNewLocation (req, res) {
           break;
         }
      }
-
     if(!exist){//if city not found
           //add location to user, set the creator to the location
           user.locations.push(newLocation);
@@ -112,9 +60,6 @@ function createNewLocation (req, res) {
      res.render('dashboard',{user: req.user});
   });
 }
-
-
-
 // Target delete location functionality
 function patchUserLocations(req, res) {
   var userIdPut = req.params.userid;
@@ -131,7 +76,6 @@ function patchUserLocations(req, res) {
       var index = user.locations.indexOf(locationIdDelete);
       user.locations.splice(index,1);
     }
-
     //save user data
     user.save(function(err, savedUser){
       if(err){
@@ -141,7 +85,6 @@ function patchUserLocations(req, res) {
       }
     });
   });
-
 }
 
 // DELETE the actual location record from db.Location
@@ -150,15 +93,12 @@ function deleteUserLocation(req, res) {
   var locationId = req.params.locationid;
   db.Location.findOneAndRemove({_id: locationId}, function(err,data) {
     if(err){
-      res.status(500).send('Internal Server Error. Totes my bad.');
+      res.status(500).send('Internal Server Error.');
     } else {
       console.log('Successful Delete');
     }
   });
 }
-
-
-
 // Get all user's locations
 function getUserLocations(req, res) {
   db.Location.find({createdBy: req.params.userid}, function(err, data) {
@@ -170,7 +110,6 @@ function getUserLocations(req, res) {
     }
   });
 }
-
 //get a specific location
 function getLocation(req, res) {
   var locationId = req.params.locationid;
@@ -182,10 +121,6 @@ function getLocation(req, res) {
     }
   });
 }
-// TODO: Update/Put a user's location record
-
-// TODO: delete a user's location record.
-
 function getStats(req,res){
   var userId = req.params.id;
   var objStuff = getCountriesCount(userId);
@@ -197,13 +132,11 @@ function getStats(req,res){
     }else{
       countries = [];
       cities = [];
-
       for(let el of user.locations){
         countries.includes(el.country) ? el : countries.push(el.country);
         cities.includes(el.city) ? el : cities.push(el.city);
       }
-
-      var userStats ={
+      var userStats={
         cities: cities,
         countries: countries,
         cityCount: cities.length,
@@ -213,11 +146,7 @@ function getStats(req,res){
     }
   });
 }
-
 function getCountriesCount(userId){
-
-  // return typeof(countries);
-
   var obj = [];
 
   db.User.findById(userId).populate('locations').exec(function(err, user){
@@ -226,7 +155,6 @@ function getCountriesCount(userId){
         obj.push(el);
     })
   });
-  // return obj;
 }
 
 /* EXPORT FUNCTIONS
@@ -236,9 +164,6 @@ module.exports = {
   returnDashboardPage: returnDashboardPage,
   createNewLocation: createNewLocation,
   getUserLocations: getUserLocations,
-  createNewUser: createNewUser,
-  getUsers: getUsers,
-  updateUser: updateUser,
   deleteUserLocation: deleteUserLocation,
   patchUserLocations: patchUserLocations,
   getStats: getStats,
