@@ -1,7 +1,8 @@
 // VARIABLES
-var map;
-var userid;
-var toggle = 0;
+var map,
+    userid,
+    markers = [],
+    toggle = 0;
 
 // FUNCTION CALLS
 $(document).ready(function() {
@@ -17,12 +18,7 @@ $(document).ready(function() {
   });
 
   // ajax call to create list of locations visited
-  $.ajax({
-    method: 'GET',
-    url: '/locations/' + formUserId,
-    dataType: 'json',
-    success: onSuccess
-  })
+  populateLocationList();
 
   // adds coordinates for locations entered into the form
   $('#location-form').bind('change', function() {
@@ -34,6 +30,15 @@ $(document).ready(function() {
 
 // FUNCTIONS
 
+function populateLocationList() {
+  $.ajax({
+    method: 'GET',
+    url: '/locations/' + formUserId,
+    dataType: 'json',
+    success: onSuccess
+  })
+}
+
 // takes ajax data and places it on the dashboard and map
 function onSuccess(responseData) {
   responseData.forEach(location => {
@@ -44,21 +49,31 @@ function onSuccess(responseData) {
       position: myLatLng,
       map: map
     });
+    markers.push(marker);
   });
+}
+
+function deleteAllMarkers() {
+  markers.forEach(marker => {
+    markers[marker].setMap(null);
+  });
+  markers = [];
 }
 
 // creates a list item for a location
 function appendLocation(location) {
-  let locationVisited = `<li id='${location._id}' class='place-visited'>
+  let locationVisited = `<li class='place-visited'>
                         <h3 class='list-item'>
                         ${location.city}, ${location.country}
                         </h3>
-                        <a><input id='${location._id}-btn' class='delete-btn' type='button' value='X'></a>
+                        <button id='${location._id}-btn'><img src='/img/trash-can-icon.png'></button>
                         </li>`;
   $('#city-list').append(locationVisited);
   $(`#${location._id}-btn`).click(function() {
     deleteUserLocation(location._id);
-    $(`#${location._id}`).remove();
+    $('.place-visited').remove();
+    initMap();
+    populateLocationList();
   });
 }
 
