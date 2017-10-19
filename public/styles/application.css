@@ -75,8 +75,13 @@ body {
       body .index-header {
         width: 100%; } }
     body .index-header h1, body .index-header h3 {
+      flex: 1;
+      direction: column;
       margin: 0;
       padding: 0; }
+    body .index-header h1 {
+      text-shadow: 1px 3px 3px #595f72;
+      font-size: 75px; }
   body .container {
     padding: 20px 0;
     width: 50%;
@@ -88,11 +93,31 @@ body {
       body .container {
         width: 100%; } }
     body .container .dashboard-header {
+      position: relative;
       display: flex;
       justify-content: space-between;
       align-items: center; }
       body .container .dashboard-header .logo {
         height: 100px; }
+      body .container .dashboard-header .title-wrap {
+        display: flex;
+        width: 300px;
+        position: absolute;
+        top: 25px;
+        left: 100px; }
+        body .container .dashboard-header .title-wrap h1, body .container .dashboard-header .title-wrap h3 {
+          flex: 1;
+          direction: column;
+          margin: 0;
+          padding: 0;
+          position: absolute; }
+        body .container .dashboard-header .title-wrap h1 {
+          text-shadow: 1px 3px 3px #595f72;
+          left: 5px;
+          top: 0; }
+        body .container .dashboard-header .title-wrap h3 {
+          left: 5px;
+          top: 34px; }
       body .container .dashboard-header .login-info {
         display: flex;
         align-items: center;
@@ -162,6 +187,7 @@ p {
   background-color: white;
   position: relative; }
   .place-visited .delete-btn {
+    cursor: pointer;
     position: absolute;
     right: 5px;
     top: 5px;
@@ -189,6 +215,10 @@ p {
     text-shadow: 0px -1px 1px #bdb5b4, 1px 1px 1px white;
     position: absolute;
     width: 30px; }
+  .place-visited .delete-button:hover {
+    background-image: -webkit-linear-gradient(top, #fff, #c2f970);
+    background-image: linear-gradient(top, #fff, #c2f970);
+    color: #0088cc; }
 
 .list-item {
   margin: 0;

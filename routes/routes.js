@@ -17,11 +17,6 @@ function returnDashboardPage (req, res) {
 
 /* USER CRUD ROUTE FUNCTIONS
 ********************************/
-  //TODO: Francisco, this may be needing to run in a config folder and config file for passport-facebook.
-  // I've added the following user cruds just to test connection on the db with postman
-  // I'm not sure crud here is what's needed compared to crud in config folder for passport? something to consider. -Jesse
-  // we do need a crud to update the users with a newly added location.
-  // once we have oAuth functioning we can experiment more with linking User CRUDs. - Jesse(sat morning)
 
 //temporary to use postman and populate a user record for reference testing
 function createNewUser (req,res) {
@@ -118,7 +113,7 @@ function createNewLocation (req, res) {
 }
 
 function deleteUserLocation(req, res) {
-
+  console.log('delete loc id requested:' + req.params.locationid);
   var locationId = req.params.locationid;
   db.Location.findOneAndRemove({_id: locationId}, function(err,data) {
     if(err){
@@ -130,8 +125,6 @@ function deleteUserLocation(req, res) {
 }
 
 // Get all user's locations
-// TODO Jesse: add a query string in server.js and handle getting _id of user record
-// This should get all created locations related to the user.
 function getUserLocations(req, res) {
   db.Location.find({createdBy: req.params.userid}, function(err, data) {
     if(err) {
@@ -143,6 +136,7 @@ function getUserLocations(req, res) {
   });
 }
 
+//get a specific location
 function getLocation(req, res) {
   var locationId = req.params.locationid;
   db.Location.findOne({_id: locationId}, function(err, data) {
@@ -168,7 +162,7 @@ function getStats(req,res){
     }else{
       countries = [];
       cities = [];
-      
+
       for(let el of user.locations){
         countries.includes(el.country) ? el : countries.push(el.country);
         cities.includes(el.city) ? el : cities.push(el.city);
@@ -182,11 +176,11 @@ function getStats(req,res){
       }
       res.json(userStats);
     }
-  }); 
+  });
 }
 
 function getCountriesCount(userId){
-  
+
   // return typeof(countries);
 
   var obj = [];
@@ -195,7 +189,7 @@ function getCountriesCount(userId){
     return user;
     user.locations.forEach(el =>{
         obj.push(el);
-    })   
+    })
   });
   // return obj;
 }

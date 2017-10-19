@@ -64,13 +64,11 @@ app.get('/locations/:userid', appRoutes.getUserLocations);
 app.get('/locations/:locationid', appRoutes.getLocation);
 app.delete('/locations/:locationid', appRoutes.deleteUserLocation);
 
-
-// These are temporary routes for front-end testing. They can be deleted once OAuth
-//  is working and the other routes are working as intended.
+// Basic Page Routing
 app.get('/', appRoutes.returnHomePage);
 app.get('/dashboard', appRoutes.returnDashboardPage);
 
- // temporary user routes for postman relationship testing.
+// temporary user routes for postman relationship testing.
 app.post('/users', appRoutes.createNewUser); //populate new user in account
 app.get('/users', appRoutes.getUsers); //get all users
 app.put('/users/:id', appRoutes.updateUser)//add location key to existing user
